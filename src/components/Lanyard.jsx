@@ -32,21 +32,29 @@ function Lanyard() {
         const dpr = window.devicePixelRatio || 1;
         const isMobile = W < 300;
 
-        canvas.width = W * dpr;
-        canvas.height = H * dpr;
-        canvas.style.width = W + 'px';
-        canvas.style.height = H + 'px';
+        // Canvas jauh lebih besar dari wrapper agar tali tidak terpotong saat ditarik
+        const CW_CANVAS = W * 3;
+        const CH_CANVAS = H * 3;
+        const OFFSET_X = W;  // canvas di-offset 1x ke kiri
+        const OFFSET_Y = H;  // canvas di-offset 1x ke atas
+
+        canvas.width = CW_CANVAS * dpr;
+        canvas.height = CH_CANVAS * dpr;
+        canvas.style.width = CW_CANVAS + 'px';
+        canvas.style.height = CH_CANVAS + 'px';
+        canvas.style.left = -OFFSET_X + 'px';
+        canvas.style.top = -OFFSET_Y + 'px';
         const ctx = canvas.getContext('2d');
         ctx.scale(dpr, dpr);
 
-        const SEG = isMobile ? 12 : 12;
-        const LEN = isMobile ? 16 : 16;
-        const AX = W / 2;
-        const AY = 8;
+        const SEG = 12;
+        const LEN = 16;
+        // Anchor di tengah atas wrapper → di-offset karena canvas lebih besar
+        const AX = OFFSET_X + W / 2;
+        const AY = OFFSET_Y + 8;
         const CW = isMobile ? 60 : 80;
         const CH = isMobile ? 40 : 50;
         const LW = isMobile ? 3 : 4;
-        // Hit area padding — bigger so easier to grab
         const HIT_PAD = isMobile ? 40 : 30;
 
         const engine = Engine.create({ gravity: { x: 0, y: 2.5 } });
@@ -196,7 +204,7 @@ function Lanyard() {
             lastTime = now;
             Engine.update(engine, Math.min(delta, 20));
 
-            ctx.clearRect(0, 0, W, H);
+            ctx.clearRect(0, 0, CW_CANVAS, CH_CANVAS);
 
             // Smooth rope
             const pts = [
@@ -224,10 +232,12 @@ function Lanyard() {
             ctx.fillStyle = '#374151';
             ctx.fill();
 
-            // Sync card
+            // Sync card — posisi physics di-offset, jadi kurangi offset untuk HTML overlay
             if (cardDivRef.current) {
+                const cx = card.position.x - OFFSET_X;
+                const cy = card.position.y - OFFSET_Y;
                 cardDivRef.current.style.transform =
-                    `translate(${card.position.x}px, ${card.position.y}px) translate(-50%, -50%) rotate(${card.angle}rad)`;
+                    `translate(${cx}px, ${cy}px) translate(-50%, -50%) rotate(${card.angle}rad)`;
             }
 
             animRef.current = requestAnimationFrame(loop);
