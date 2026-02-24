@@ -1,0 +1,142 @@
+.about {
+    background: var(--off-white);
+}
+
+.about-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 60px;
+}
+
+.about-photo {
+    flex: 0 0 280px;
+}
+
+.about-photo-wrapper {
+    width: 280px;
+    height: 340px;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    background: var(--gray-light);
+    position: relative;
+}
+
+.about-photo-wrapper::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--green-primary);
+}
+
+.about-photo-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.about-photo-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    color: var(--green-primary);
+}
+
+.about-info {
+    flex: 1;
+}
+
+.about-info h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: var(--black);
+}
+
+.about-info p {
+    color: var(--gray-dark);
+    margin-bottom: 24px;
+    line-height: 1.8;
+}
+
+.about-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.about-detail-item {
+    display: flex;
+    gap: 8px;
+    font-size: 0.9rem;
+}
+
+.about-detail-item strong {
+    color: var(--black);
+    min-width: 80px;
+}
+
+.about-detail-item span {
+    color: var(--gray);
+}
+
+.skills-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: var(--black);
+}
+
+.skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.skill-tag {
+    background: var(--green-light);
+    color: var(--green-dark);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.skill-tag:hover {
+    background: var(--green-primary);
+    color: var(--white);
+}
+
+@media (max-width: 768px) {
+    .about-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .about-photo {
+        flex: none;
+    }
+
+    .about-photo-wrapper {
+        width: 200px;
+        height: 240px;
+    }
+
+    .about-details {
+        grid-template-columns: 1fr;
+        text-align: left;
+    }
+
+    .skills-list {
+        justify-content: center;
+    }
+}
