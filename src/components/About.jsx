@@ -15,6 +15,8 @@ function About() {
 
     // Gyroscope — foto miring sesuai kemiringan HP
     useEffect(() => {
+        let hasRealGyro = false;
+
         const onOrientation = (e) => {
             const card = cardRef.current;
             if (!card) return;
@@ -22,16 +24,26 @@ function About() {
             const gamma = e.gamma || 0;
             const beta = e.beta || 0;
 
-            const rotateY = Math.max(-15, Math.min(15, gamma * 0.4));
-            const rotateX = Math.max(-15, Math.min(15, -(beta - 45) * 0.3));
+            // Hanya aktifkan gyro jika ada nilai signifikan (bukan desktop palsu)
+            if (!hasRealGyro) {
+                if (Math.abs(gamma) > 1 || Math.abs(beta) > 1) {
+                    hasRealGyro = true;
+                    gyroActiveRef.current = true;
+                } else {
+                    return; // skip, kemungkinan desktop
+                }
+            }
 
-            card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-            gyroActiveRef.current = true;
+            // Sensitivity lebih tinggi agar tilt lebih terasa
+            const rotateY = Math.max(-25, Math.min(25, gamma * 0.7));
+            const rotateX = Math.max(-25, Math.min(25, -(beta - 45) * 0.5));
+
+            card.style.transform = `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
 
             if (shineRef.current) {
-                const px = 50 + gamma;
-                const py = 50 + (beta - 45);
-                shineRef.current.style.background = `radial-gradient(circle at ${px}% ${py}%, rgba(255,255,255,0.3) 0%, transparent 60%)`;
+                const px = 50 + gamma * 0.8;
+                const py = 50 + (beta - 45) * 0.6;
+                shineRef.current.style.background = `radial-gradient(circle at ${px}% ${py}%, rgba(255,255,255,0.35) 0%, transparent 55%)`;
                 shineRef.current.style.opacity = '1';
             }
         };
@@ -56,9 +68,9 @@ function About() {
         };
     }, []);
 
-    // Mouse/touch tilt (desktop & manual touch)
+    // Mouse/touch tilt (desktop & fallback)
     const handleMove = useCallback((clientX, clientY) => {
-        if (gyroActiveRef.current) return; // gyro takes priority
+        if (gyroActiveRef.current) return;
         const card = cardRef.current;
         if (!card) return;
 
@@ -68,15 +80,15 @@ function About() {
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
 
-        const rotateY = ((x - centerX) / centerX) * 15;
-        const rotateX = ((centerY - y) / centerY) * 15;
+        const rotateY = ((x - centerX) / centerX) * 20;
+        const rotateX = ((centerY - y) / centerY) * 20;
 
-        card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03, 1.03, 1.03)`;
+        card.style.transform = `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
 
         if (shineRef.current) {
             const px = (x / rect.width) * 100;
             const py = (y / rect.height) * 100;
-            shineRef.current.style.background = `radial-gradient(circle at ${px}% ${py}%, rgba(255,255,255,0.35) 0%, transparent 60%)`;
+            shineRef.current.style.background = `radial-gradient(circle at ${px}% ${py}%, rgba(255,255,255,0.4) 0%, transparent 55%)`;
             shineRef.current.style.opacity = '1';
         }
     }, []);
@@ -95,11 +107,11 @@ function About() {
     }, [handleMove]);
 
     const handleLeave = useCallback(() => {
-        if (gyroActiveRef.current) return; // gyro handles reset
+        if (gyroActiveRef.current) return;
         if (rafRef.current) cancelAnimationFrame(rafRef.current);
         const card = cardRef.current;
         if (card) {
-            card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+            card.style.transform = 'perspective(600px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
         }
         if (shineRef.current) {
             shineRef.current.style.opacity = '0';
