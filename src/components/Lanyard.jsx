@@ -197,6 +197,46 @@ function Lanyard() {
         window.addEventListener('touchmove', onTouchMove, { passive: false });
         window.addEventListener('touchend', onTouchEnd);
 
+        // --- Gyroscope support ---
+        const BASE_GRAVITY_Y = 2.5;
+        const GYRO_SCALE = 0.06;
+
+        const onDeviceOrientation = (e) => {
+            if (dragRef.current.active) return; // don't fight with drag
+            const gamma = e.gamma || 0; // left-right tilt (-90 to 90)
+            const beta = e.beta || 0;   // front-back tilt (-180 to 180)
+
+            // Clamp values
+            const gx = Math.max(-3, Math.min(3, gamma * GYRO_SCALE));
+            const gy = Math.max(0.5, Math.min(5, BASE_GRAVITY_Y + (beta - 45) * GYRO_SCALE));
+
+            engine.gravity.x = gx;
+            engine.gravity.y = gy;
+        };
+
+        // Request permission for iOS 13+
+        const enableGyro = () => {
+            if (typeof DeviceOrientationEvent !== 'undefined' &&
+                typeof DeviceOrientationEvent.requestPermission === 'function') {
+                DeviceOrientationEvent.requestPermission()
+                    .then(state => {
+                        if (state === 'granted') {
+                            window.addEventListener('deviceorientation', onDeviceOrientation);
+                        }
+                    })
+                    .catch(console.warn);
+            } else if ('DeviceOrientationEvent' in window) {
+                window.addEventListener('deviceorientation', onDeviceOrientation);
+            }
+        };
+        enableGyro();
+        // Also enable on first touch (iOS needs user gesture)
+        const onFirstTouch = () => {
+            enableGyro();
+            window.removeEventListener('touchstart', onFirstTouch);
+        };
+        window.addEventListener('touchstart', onFirstTouch, { once: true });
+
         // Animation loop
         let lastTime = performance.now();
         const loop = (now) => {
@@ -252,6 +292,8 @@ function Lanyard() {
             canvas.removeEventListener('touchstart', onTouchStart);
             window.removeEventListener('touchmove', onTouchMove);
             window.removeEventListener('touchend', onTouchEnd);
+            window.removeEventListener('deviceorientation', onDeviceOrientation);
+            window.removeEventListener('touchstart', onFirstTouch);
             Engine.clear(engine);
             engineRef.current = null;
         };
