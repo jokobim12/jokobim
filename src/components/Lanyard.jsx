@@ -10,11 +10,7 @@ function Lanyard() {
     const cardDivRef = useRef(null);
     const engineRef = useRef(null);
     const animRef = useRef(null);
-    const dragRef = useRef({
-        active: false,
-        body: null,
-        offset: { x: 0, y: 0 },
-    });
+    const dragRef = useRef({ active: false, body: null, offset: { x: 0, y: 0 } });
 
     useEffect(() => {
         const wrapper = wrapperRef.current;
@@ -36,7 +32,6 @@ function Lanyard() {
         const dpr = window.devicePixelRatio || 1;
         const isMobile = W < 300;
 
-        // Canvas
         canvas.width = W * dpr;
         canvas.height = H * dpr;
         canvas.style.width = W + 'px';
@@ -44,16 +39,16 @@ function Lanyard() {
         const ctx = canvas.getContext('2d');
         ctx.scale(dpr, dpr);
 
-        // Config — longer rope so card hangs in the middle
-        const SEG = isMobile ? 8 : 12;
-        const LEN = isMobile ? 14 : 16;
+        const SEG = isMobile ? 12 : 12;
+        const LEN = isMobile ? 16 : 16;
         const AX = W / 2;
         const AY = 8;
         const CW = isMobile ? 60 : 80;
         const CH = isMobile ? 40 : 50;
         const LW = isMobile ? 3 : 4;
+        // Hit area padding — bigger so easier to grab
+        const HIT_PAD = isMobile ? 40 : 30;
 
-        // Engine — snappy gravity
         const engine = Engine.create({ gravity: { x: 0, y: 2.5 } });
         engineRef.current = engine;
 
@@ -61,107 +56,138 @@ function Lanyard() {
         const links = [];
         for (let i = 0; i < SEG; i++) {
             links.push(Bodies.circle(AX, AY + (i + 1) * LEN, 3, {
-                mass: 0.1,
-                friction: 0.4,
-                frictionAir: 0.02,
-                restitution: 0.01,
+                mass: 0.1, friction: 0.4, frictionAir: 0.02, restitution: 0.01,
             }));
         }
 
-        // Chain constraints
+        // Chain
         const constraints = [];
         constraints.push(Constraint.create({
-            pointA: { x: AX, y: AY },
-            bodyB: links[0],
-            length: LEN,
-            stiffness: 0.7,
-            damping: 0.04,
+            pointA: { x: AX, y: AY }, bodyB: links[0],
+            length: LEN, stiffness: 0.7, damping: 0.04,
         }));
         for (let i = 0; i < links.length - 1; i++) {
             constraints.push(Constraint.create({
-                bodyA: links[i],
-                bodyB: links[i + 1],
-                length: LEN,
-                stiffness: 0.7,
-                damping: 0.04,
+                bodyA: links[i], bodyB: links[i + 1],
+                length: LEN, stiffness: 0.7, damping: 0.04,
             }));
         }
 
-        // Card body
+        // Card
         const cardY = AY + (SEG + 1) * LEN + CH / 2;
         const card = Bodies.rectangle(AX, cardY, CW, CH, {
-            mass: 0.6,
-            friction: 0.3,
-            frictionAir: 0.02,
-            restitution: 0.01,
+            mass: 0.6, friction: 0.3, frictionAir: 0.02, restitution: 0.01,
             chamfer: { radius: 6 },
         });
-
         constraints.push(Constraint.create({
-            bodyA: links[links.length - 1],
-            bodyB: card,
+            bodyA: links[links.length - 1], bodyB: card,
             pointB: { x: 0, y: -CH / 2 },
-            length: LEN * 0.5,
-            stiffness: 0.7,
-            damping: 0.04,
+            length: LEN * 0.5, stiffness: 0.7, damping: 0.04,
         }));
 
-        const allBodies = [...links, card];
-        Composite.add(engine.world, [...allBodies, ...constraints]);
+        Composite.add(engine.world, [...links, ...constraints, card]);
 
-        // --- Custom mouse handling (works beyond canvas bounds) ---
-        const getCanvasPos = (clientX, clientY) => {
+        // --- Hit detection ---
+        const getPos = (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            return { x: clientX - rect.left, y: clientY - rect.top, clientX, clientY };
+        };
+
+        const getPosFromClient = (clientX, clientY) => {
             const rect = canvas.getBoundingClientRect();
             return { x: clientX - rect.left, y: clientY - rect.top };
         };
 
-        const findBodyAt = (pos) => {
-            // Check card first (bigger target)
+        const findBody = (pos) => {
+            // Card — generous hit area
             const dx = pos.x - card.position.x;
             const dy = pos.y - card.position.y;
-            if (Math.abs(dx) < CW && Math.abs(dy) < CH) return card;
-            // Check links
+            if (Math.abs(dx) < CW + HIT_PAD && Math.abs(dy) < CH + HIT_PAD) return card;
+            // Links
             for (const link of links) {
                 const ldx = pos.x - link.position.x;
                 const ldy = pos.y - link.position.y;
-                if (ldx * ldx + ldy * ldy < 400) return link; // 20px radius
+                if (ldx * ldx + ldy * ldy < (HIT_PAD + 10) * (HIT_PAD + 10)) return link;
             }
             return null;
         };
 
-        const onPointerDown = (e) => {
-            const pos = getCanvasPos(e.clientX, e.clientY);
-            const body = findBodyAt(pos);
+        // --- Mouse events (desktop) ---
+        const onMouseDown = (e) => {
+            if (e.button !== 0) return; // left click only
+            const pos = getPosFromClient(e.clientX, e.clientY);
+            const body = findBody(pos);
             if (body) {
                 dragRef.current = {
-                    active: true,
-                    body,
+                    active: true, body,
                     offset: { x: pos.x - body.position.x, y: pos.y - body.position.y },
                 };
+                canvas.style.cursor = 'grabbing';
                 e.preventDefault();
+                e.stopPropagation();
+            }
+            // If no body hit, let event pass through for scrolling
+        };
+
+        const onMouseMove = (e) => {
+            if (!dragRef.current.active) return;
+            const pos = getPosFromClient(e.clientX, e.clientY);
+            const x = pos.x - dragRef.current.offset.x;
+            const y = pos.y - dragRef.current.offset.y;
+            Body.setPosition(dragRef.current.body, { x, y });
+            Body.setVelocity(dragRef.current.body, { x: 0, y: 0 });
+        };
+
+        const onMouseUp = () => {
+            if (dragRef.current.active) {
+                dragRef.current.active = false;
+                dragRef.current.body = null;
+                canvas.style.cursor = 'grab';
             }
         };
 
-        const onPointerMove = (e) => {
-            if (!dragRef.current.active) return;
-            const rect = canvas.getBoundingClientRect();
-            // Allow dragging beyond canvas — calculate position relative to canvas
-            const x = e.clientX - rect.left - dragRef.current.offset.x;
-            const y = e.clientY - rect.top - dragRef.current.offset.y;
-            Body.setPosition(dragRef.current.body, { x, y });
-            Body.setVelocity(dragRef.current.body, { x: 0, y: 0 });
-            e.preventDefault();
+        // --- Touch events (mobile) ---
+        const onTouchStart = (e) => {
+            if (e.touches.length !== 1) return;
+            const touch = e.touches[0];
+            const pos = getPosFromClient(touch.clientX, touch.clientY);
+            const body = findBody(pos);
+            if (body) {
+                dragRef.current = {
+                    active: true, body,
+                    offset: { x: pos.x - body.position.x, y: pos.y - body.position.y },
+                };
+                // Prevent scroll ONLY when touching the lanyard
+                e.preventDefault();
+            }
+            // If no body hit → don't preventDefault, so page scrolls normally
         };
 
-        const onPointerUp = () => {
+        const onTouchMove = (e) => {
+            if (!dragRef.current.active) return;
+            const touch = e.touches[0];
+            const pos = getPosFromClient(touch.clientX, touch.clientY);
+            const x = pos.x - dragRef.current.offset.x;
+            const y = pos.y - dragRef.current.offset.y;
+            Body.setPosition(dragRef.current.body, { x, y });
+            Body.setVelocity(dragRef.current.body, { x: 0, y: 0 });
+            e.preventDefault(); // prevent scroll while dragging
+        };
+
+        const onTouchEnd = () => {
             dragRef.current.active = false;
             dragRef.current.body = null;
         };
 
-        // Listen on window for drag beyond canvas
-        canvas.addEventListener('pointerdown', onPointerDown);
-        window.addEventListener('pointermove', onPointerMove);
-        window.addEventListener('pointerup', onPointerUp);
+        // Attach events — canvas gets mousedown/touchstart, window gets move/up
+        canvas.addEventListener('mousedown', onMouseDown);
+        window.addEventListener('mousemove', onMouseMove);
+        window.addEventListener('mouseup', onMouseUp);
+        canvas.addEventListener('touchstart', onTouchStart, { passive: false });
+        window.addEventListener('touchmove', onTouchMove, { passive: false });
+        window.addEventListener('touchend', onTouchEnd);
 
         // Animation loop
         let lastTime = performance.now();
@@ -178,15 +204,12 @@ function Lanyard() {
                 ...links.map(l => l.position),
                 { x: card.position.x, y: card.position.y - CH / 2 },
             ];
-
             ctx.beginPath();
             ctx.moveTo(pts[0].x, pts[0].y);
             for (let i = 1; i < pts.length; i++) {
                 const prev = pts[i - 1];
                 const curr = pts[i];
-                const mx = (prev.x + curr.x) / 2;
-                const my = (prev.y + curr.y) / 2;
-                ctx.quadraticCurveTo(prev.x, prev.y, mx, my);
+                ctx.quadraticCurveTo(prev.x, prev.y, (prev.x + curr.x) / 2, (prev.y + curr.y) / 2);
             }
             ctx.lineTo(pts[pts.length - 1].x, pts[pts.length - 1].y);
             ctx.strokeStyle = '#1a1a1a';
@@ -213,9 +236,12 @@ function Lanyard() {
 
         return () => {
             if (animRef.current) cancelAnimationFrame(animRef.current);
-            canvas.removeEventListener('pointerdown', onPointerDown);
-            window.removeEventListener('pointermove', onPointerMove);
-            window.removeEventListener('pointerup', onPointerUp);
+            canvas.removeEventListener('mousedown', onMouseDown);
+            window.removeEventListener('mousemove', onMouseMove);
+            window.removeEventListener('mouseup', onMouseUp);
+            canvas.removeEventListener('touchstart', onTouchStart);
+            window.removeEventListener('touchmove', onTouchMove);
+            window.removeEventListener('touchend', onTouchEnd);
             Engine.clear(engine);
             engineRef.current = null;
         };

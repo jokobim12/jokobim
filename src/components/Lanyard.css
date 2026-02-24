@@ -15,12 +15,9 @@
     width: 100%;
     height: 100%;
     z-index: 1;
-    pointer-events: auto;
     cursor: grab;
-}
-
-.lanyard-canvas:active {
-    cursor: grabbing;
+    /* Allow scroll pass-through by default — only block when dragging */
+    touch-action: auto;
 }
 
 .lanyard-card-overlay {
