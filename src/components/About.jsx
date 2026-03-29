@@ -11,66 +11,9 @@ function About() {
     const cardRef = useRef(null);
     const shineRef = useRef(null);
     const rafRef = useRef(null);
-    const gyroActiveRef = useRef(false);
 
-    // Gyroscope — foto miring sesuai kemiringan HP
-    useEffect(() => {
-        let hasRealGyro = false;
-
-        const onOrientation = (e) => {
-            const card = cardRef.current;
-            if (!card) return;
-
-            const gamma = e.gamma || 0;
-            const beta = e.beta || 0;
-
-            // Hanya aktifkan gyro jika ada nilai signifikan (bukan desktop palsu)
-            if (!hasRealGyro) {
-                if (Math.abs(gamma) > 1 || Math.abs(beta) > 1) {
-                    hasRealGyro = true;
-                    gyroActiveRef.current = true;
-                } else {
-                    return; // skip, kemungkinan desktop
-                }
-            }
-
-            // Sensitivity lebih tinggi agar tilt lebih terasa
-            const rotateY = Math.max(-25, Math.min(25, gamma * 0.7));
-            const rotateX = Math.max(-25, Math.min(25, -(beta - 45) * 0.5));
-
-            card.style.transform = `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-
-            if (shineRef.current) {
-                const px = 50 + gamma * 0.8;
-                const py = 50 + (beta - 45) * 0.6;
-                shineRef.current.style.background = `radial-gradient(circle at ${px}% ${py}%, rgba(255,255,255,0.35) 0%, transparent 55%)`;
-                shineRef.current.style.opacity = '1';
-            }
-        };
-
-        const enable = () => {
-            if (typeof DeviceOrientationEvent !== 'undefined' &&
-                typeof DeviceOrientationEvent.requestPermission === 'function') {
-                DeviceOrientationEvent.requestPermission()
-                    .then(s => { if (s === 'granted') window.addEventListener('deviceorientation', onOrientation); })
-                    .catch(() => { });
-            } else if ('DeviceOrientationEvent' in window) {
-                window.addEventListener('deviceorientation', onOrientation);
-            }
-        };
-        enable();
-        const firstTouch = () => { enable(); window.removeEventListener('touchstart', firstTouch); };
-        window.addEventListener('touchstart', firstTouch, { once: true });
-
-        return () => {
-            window.removeEventListener('deviceorientation', onOrientation);
-            window.removeEventListener('touchstart', firstTouch);
-        };
-    }, []);
-
-    // Mouse/touch tilt (desktop & fallback)
+    // Mouse/touch tilt
     const handleMove = useCallback((clientX, clientY) => {
-        if (gyroActiveRef.current) return;
         const card = cardRef.current;
         if (!card) return;
 
@@ -107,7 +50,6 @@ function About() {
     }, [handleMove]);
 
     const handleLeave = useCallback(() => {
-        if (gyroActiveRef.current) return;
         if (rafRef.current) cancelAnimationFrame(rafRef.current);
         const card = cardRef.current;
         if (card) {
