@@ -73,7 +73,7 @@ function Footer() {
                 </div>
 
                 <div className="footer-bottom">
-                    &copy; {year} Joko<span>bim</span>. Semua hak dilindungi.
+                    &copy; {year} Joko<span>bim</span> - Software Developer
                 </div>
             </div>
         </footer>
