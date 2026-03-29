@@ -5,7 +5,7 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    overflow: visible;
+    overflow: hidden;
 }
 
 .lanyard-canvas {
