@@ -99,6 +99,7 @@
     .lanyard-wrapper {
         width: 280px;
         height: 440px;
+        overflow: hidden;
     }
 
     .lanyard-card-overlay {
