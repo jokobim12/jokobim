@@ -80,6 +80,25 @@
     z-index: 10;
 }
 
+.btn-ebook {
+    background: white;
+    color: var(--green-primary);
+    border: 2px solid var(--gray-light);
+}
+
+.btn-ebook:hover {
+    border-color: var(--green-primary);
+    transform: translateY(-2px);
+}
+
+.btn-ebook svg {
+    flex: 0 0 auto;
+}
+
+.btn-ebook-external {
+    font-size: 0.75rem;
+}
+
 .hero-image {
     flex: 0 0 360px;
     animation: fadeInUp 0.8s ease 0.2s both;

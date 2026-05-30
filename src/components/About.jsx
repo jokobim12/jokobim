@@ -1,4 +1,4 @@
-import { useRef, useCallback, useEffect } from 'react';
+import { useRef, useCallback } from 'react';
 import './About.css';
 
 const skills = [
@@ -12,7 +12,6 @@ function About() {
     const shineRef = useRef(null);
     const rafRef = useRef(null);
 
-    // Mouse/touch tilt
     const handleMove = useCallback((clientX, clientY) => {
         const card = cardRef.current;
         if (!card) return;
@@ -88,7 +87,7 @@ function About() {
                         <p style={{ textAlign: 'justify' }}>
                             Saya adalah mahasiswa Teknologi Informasi di Politeknik Negeri
                             Tanah laut. Memiliki ketertarikan dalam bidang teknologi
-                            informasi dan Olahraga. Saya menekuni dunia teknologi sejak saya berusia 16 Tahun
+                            informasi dan Olahraga. Saya menekuni dunia teknologi sejak saya berusia 16 Tahun.
                         </p>
 
                         <div className="about-details">

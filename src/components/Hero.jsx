@@ -1,5 +1,7 @@
+import { FaBookOpen, FaExternalLinkAlt } from 'react-icons/fa';
 import Lanyard from './Lanyard';
 import './Hero.css';
+import { FaAndroid } from 'react-icons/fa';
 
 function Hero() {
     return (
@@ -16,7 +18,17 @@ function Hero() {
                     </p>
                     <div className="hero-buttons">
                         <a href="#portfolio" className="btn btn-primary">Lihat Portofolio</a>
-                        <a href="#contact" className="btn btn-outline">Hubungi Saya</a>
+                        {/* <a href="#contact" className="btn btn-outline">Hubungi Saya</a> */}
+                        <a
+                            href="https://bimora-kappa.vercel.app/"
+                            className="btn btn-ebook"
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                           <FaAndroid style={{ marginRight: '4px' }} />
+                           Aplikasi E-book for Android 
+                            {/* <FaExternalLinkAlt className="btn-ebook-external" /> */}
+                        </a>
                     </div>
                 </div>
                 <div className="hero-image">
