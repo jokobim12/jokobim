@@ -1,7 +1,6 @@
-import { FaBookOpen, FaExternalLinkAlt } from 'react-icons/fa';
+import { FaBookOpen, FaExternalLinkAlt, FaGamepad } from 'react-icons/fa';
 import Lanyard from './Lanyard';
 import './Hero.css';
-import { FaAndroid } from 'react-icons/fa';
 
 function Hero() {
     return (
@@ -20,14 +19,13 @@ function Hero() {
                         <a href="#portfolio" className="btn btn-primary">Lihat Portofolio</a>
                         {/* <a href="#contact" className="btn btn-outline">Hubungi Saya</a> */}
                         <a
-                            href="https://bimora-kappa.vercel.app/"
+                            href="https://niskala-masa.vercel.app/"
                             className="btn btn-ebook"
                             target="_blank"
                             rel="noreferrer"
                         >
-                           <FaAndroid style={{ marginRight: '4px' }} />
-                           Aplikasi E-book for Android 
-                            {/* <FaExternalLinkAlt className="btn-ebook-external" /> */}
+                           <FaGamepad style={{ marginRight: '6px' }} />
+                           Mainkan Game Niskala Masa
                         </a>
                     </div>
                 </div>
