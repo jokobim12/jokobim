@@ -1,0 +1,149 @@
+.prestasi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.prestasi-card {
+  background: var(--white);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--gray-light);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  flex-direction: column;
+}
+
+.prestasi-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--green-light);
+}
+
+/* Image Wrapper with Fixed Aspect Ratio (4/5 like IG Feed) */
+.prestasi-image-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background-color: var(--off-white);
+}
+
+.prestasi-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* ensures image covers the area, acting like a background */
+  object-position: center;
+  transition: transform 0.6s ease;
+}
+
+.prestasi-card:hover .prestasi-image {
+  transform: scale(1.05);
+}
+
+/* Overlay that appears on hover */
+.prestasi-image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.1) 100%);
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.4s ease;
+}
+
+.prestasi-card:hover .prestasi-image-overlay {
+  opacity: 1;
+}
+
+.prestasi-icon-large {
+  font-size: 3rem;
+  color: var(--green-primary);
+  background: var(--white);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 25px rgba(22, 163, 74, 0.4);
+  transform: translateY(20px);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.prestasi-card:hover .prestasi-icon-large {
+  transform: translateY(0);
+}
+
+.prestasi-content {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.prestasi-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+  gap: 12px;
+}
+
+.prestasi-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--black);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.prestasi-year {
+  background: var(--green-light);
+  color: var(--green-dark);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  flex-shrink: 0;
+}
+
+.prestasi-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--gray);
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.prestasi-category {
+  color: var(--green-primary);
+}
+
+.prestasi-dot {
+  font-size: 0.5rem;
+}
+
+.prestasi-desc {
+  font-size: 0.95rem;
+  color: var(--gray-dark);
+  line-height: 1.6;
+  margin: 0;
+  margin-top: auto;
+}
+
+@media (max-width: 768px) {
+  .prestasi-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
