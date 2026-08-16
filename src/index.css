@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-  --green-primary: #16a34a;
-  --green-dark: #15803d;
-  --green-light: #bbf7d0;
-  --green-accent: #22c55e;
+  --green-primary: #dc2626; /* Merah KMIPN */
+  --green-dark: #b91c1c; /* Merah Gelap */
+  --green-light: #fef3c7; /* Kuning Muda (aksen) */
+  --green-accent: #eab308; /* Kuning Terang (aksen) */
   --white: #ffffff;
   --off-white: #f8faf9;
   --black: #1a1a1a;
