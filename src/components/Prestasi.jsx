@@ -5,7 +5,7 @@ const achievements = [
     {
         title: 'Finalis KMIPN 2026',
         category: 'Game Development',
-        organizer: 'Politeknik Negeri Jakarta (Tuan Rumah)',
+        organizer: 'Politeknik Negeri Ujung Pandang (Tuan Rumah)',
         year: '2026',
         desc: 'Finalis Kejuaraan Nasional Mahasiswa Bidang Informatika dan Komputer (KMIPN) Kategori Aplikasi Permainan atau Game Development.',
         icon: <FaTrophy />,
