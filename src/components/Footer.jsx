@@ -20,10 +20,13 @@ const socialLinks = [
 ];
 
 const navLinks = [
-    { label: 'Home', href: '#home' },
+    { label: 'Overview', href: '#home' },
     { label: 'Tentang', href: '#about' },
     { label: 'CV', href: '#cv' },
     { label: 'Portofolio', href: '#portfolio' },
+    { label: 'Prestasi', href: '#prestasi' },
+    { label: 'Aktivitas', href: '#activity' },
+    { label: 'Lokasi', href: '#location' },
     { label: 'Kontak', href: '#contact' },
 ];
 
@@ -35,14 +38,14 @@ function Footer() {
             <div className="container">
                 <div className="footer-content">
                     <div className="footer-brand">
-                        <h3>Joko<span>bim</span></h3>
+                        <h3 className="font-mono">jokobim12<span>/portfolio</span></h3>
                         <p>
-                            Software Developer 
+                            Software Developer & IT Student Politeknik Negeri Tanah Laut.
                         </p>
                     </div>
 
                     <div className="footer-links">
-                        <h4>Navigasi</h4>
+                        <h4 className="font-mono">Navigation</h4>
                         <ul>
                             {navLinks.map((link) => (
                                 <li key={link.href}>
@@ -53,7 +56,7 @@ function Footer() {
                     </div>
 
                     <div className="footer-social">
-                        <h4>Sosial Media</h4>
+                        <h4 className="font-mono">Social Connect</h4>
                         <div className="footer-social-icons">
                             {socialLinks.map((social) => (
                                 <a
@@ -72,8 +75,10 @@ function Footer() {
                     </div>
                 </div>
 
-                <div className="footer-bottom">
-                    &copy; {year} Joko<span>bim</span> - Software Developer
+                <div className="footer-bottom font-mono">
+                    <span>&copy; {year} Joko Bimantaro (@jokobim12)</span>
+                    <span className="dot-divider">•</span>
+                    <span>Built with React & GitHub Design System</span>
                 </div>
             </div>
         </footer>
