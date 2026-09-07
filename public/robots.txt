@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# Directives for Search Engine Crawlers & Google AI Bots
+User-agent: Googlebot
+Allow: /
+
+User-agent: GoogleOther
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://www.jokobim.web.id/sitemap.xml
