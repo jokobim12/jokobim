@@ -5,7 +5,7 @@
 .cv-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 32px;
+  gap: 24px;
   margin-bottom: 32px;
 }
 
@@ -13,12 +13,12 @@
   background-color: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: var(--radius-md);
-  padding: 24px;
+  padding: 20px 24px;
 }
 
 .cv-column h3 {
-  font-size: 1.1rem;
-  font-weight: 700;
+  font-size: 1.05rem;
+  font-weight: 600;
   color: var(--text-primary);
   margin-bottom: 20px;
   display: flex;
@@ -26,10 +26,12 @@
   gap: 10px;
   padding-bottom: 12px;
   border-bottom: 1px solid var(--border-muted);
+  letter-spacing: -0.01em;
 }
 
 .cv-column h3 svg {
   color: var(--accent-blue);
+  font-size: 1rem;
 }
 
 .timeline {
@@ -37,13 +39,13 @@
   flex-direction: column;
   gap: 20px;
   position: relative;
-  padding-left: 16px;
+  padding-left: 20px;
 }
 
 .timeline::before {
   content: '';
   position: absolute;
-  left: 4px;
+  left: 5px;
   top: 8px;
   bottom: 8px;
   width: 2px;
@@ -57,39 +59,42 @@
 .timeline-item::before {
   content: '';
   position: absolute;
-  left: -16px;
+  left: -20px;
   top: 6px;
   width: 8px;
   height: 8px;
   border-radius: 50%;
   background-color: var(--accent-green-bright);
-  border: 2px solid var(--card-bg);
+  box-shadow: 0 0 0 3px var(--card-bg);
 }
 
 .timeline-date {
   font-family: var(--font-mono);
-  font-size: 0.76rem;
+  font-size: 0.74rem;
   color: var(--accent-green-bright);
-  display: block;
-  margin-bottom: 4px;
+  display: inline-block;
+  padding: 1px 6px;
+  background-color: rgba(63, 185, 80, 0.1);
+  border-radius: 4px;
+  margin-bottom: 6px;
 }
 
 .timeline-title {
-  font-size: 0.98rem;
+  font-size: 0.95rem;
   font-weight: 600;
   color: var(--text-primary);
   margin-bottom: 2px;
 }
 
 .timeline-place {
-  font-size: 0.84rem;
+  font-size: 0.82rem;
   font-weight: 500;
   color: var(--accent-blue);
   margin-bottom: 6px;
 }
 
 .timeline-desc {
-  font-size: 0.85rem;
+  font-size: 0.84rem;
   color: var(--text-secondary);
   line-height: 1.5;
 }
@@ -103,5 +108,9 @@
 @media (max-width: 768px) {
   .cv-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .cv-column {
+    padding: 16px 18px;
   }
 }

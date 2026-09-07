@@ -17,7 +17,7 @@ function Lanyard() {
         const canvas = canvasRef.current;
         if (!wrapper || !canvas) return;
 
-        // HMR cleanup
+        // Clean previous engine if any
         if (engineRef.current) {
             Engine.clear(engineRef.current);
             engineRef.current = null;
@@ -27,16 +27,15 @@ function Lanyard() {
             animRef.current = null;
         }
 
-        const W = wrapper.clientWidth;
-        const H = wrapper.clientHeight;
+        const W = wrapper.clientWidth || 280;
+        const H = wrapper.clientHeight || 420;
         const dpr = window.devicePixelRatio || 1;
-        const isMobile = W < 300;
+        const isMobileScreen = typeof window !== 'undefined' && window.innerWidth <= 768;
 
-        // Canvas jauh lebih besar dari wrapper agar tali tidak terpotong saat ditarik
         const CW_CANVAS = W * 3;
         const CH_CANVAS = H * 3;
-        const OFFSET_X = W;  // canvas di-offset 1x ke kiri
-        const OFFSET_Y = H;  // canvas di-offset 1x ke atas
+        const OFFSET_X = W;
+        const OFFSET_Y = H;
 
         canvas.width = CW_CANVAS * dpr;
         canvas.height = CH_CANVAS * dpr;
@@ -47,17 +46,17 @@ function Lanyard() {
         const ctx = canvas.getContext('2d');
         ctx.scale(dpr, dpr);
 
-        const SEG = 12;
-        const LEN = 16;
-        // Anchor di tengah atas wrapper → di-offset karena canvas lebih besar
+        // Extended rope length so badge hangs significantly lower as requested
+        const SEG = isMobileScreen ? 6 : 7;
+        const LEN = isMobileScreen ? 16 : 14;
         const AX = OFFSET_X + W / 2;
-        const AY = OFFSET_Y + 8;
-        const CW = isMobile ? 60 : 80;
-        const CH = isMobile ? 40 : 50;
-        const LW = isMobile ? 3 : 4;
-        const HIT_PAD = isMobile ? 40 : 30;
+        const AY = OFFSET_Y + 24;
+        const CW = isMobileScreen ? 48 : 65;
+        const CH = isMobileScreen ? 28 : 40;
+        const LW = isMobileScreen ? 3 : 4;
+        const HIT_PAD = isMobileScreen ? 30 : 30;
 
-        const engine = Engine.create({ gravity: { x: 0, y: 2.5 } });
+        const engine = Engine.create({ gravity: { x: 0, y: 2.2 } });
         engineRef.current = engine;
 
         // Rope links
@@ -84,7 +83,7 @@ function Lanyard() {
         // Card
         const cardY = AY + (SEG + 1) * LEN + CH / 2;
         const card = Bodies.rectangle(AX, cardY, CW, CH, {
-            mass: 0.6, friction: 0.3, frictionAir: 0.02, restitution: 0.01,
+            mass: 0.5, friction: 0.3, frictionAir: 0.02, restitution: 0.01,
             chamfer: { radius: 6 },
         });
         constraints.push(Constraint.create({
@@ -95,18 +94,16 @@ function Lanyard() {
 
         Composite.add(engine.world, [...links, ...constraints, card]);
 
-        // --- Hit detection ---
+        // Hit detection
         const getPosFromClient = (clientX, clientY) => {
             const rect = canvas.getBoundingClientRect();
             return { x: clientX - rect.left, y: clientY - rect.top };
         };
 
         const findBody = (pos) => {
-            // Card — generous hit area
             const dx = pos.x - card.position.x;
             const dy = pos.y - card.position.y;
             if (Math.abs(dx) < CW + HIT_PAD && Math.abs(dy) < CH + HIT_PAD) return card;
-            // Links
             for (const link of links) {
                 const ldx = pos.x - link.position.x;
                 const ldy = pos.y - link.position.y;
@@ -115,9 +112,9 @@ function Lanyard() {
             return null;
         };
 
-        // --- Mouse events (desktop) ---
+        // Mouse events
         const onMouseDown = (e) => {
-            if (e.button !== 0) return; // left click only
+            if (e.button !== 0) return;
             const pos = getPosFromClient(e.clientX, e.clientY);
             const body = findBody(pos);
             if (body) {
@@ -129,7 +126,6 @@ function Lanyard() {
                 e.preventDefault();
                 e.stopPropagation();
             }
-            // If no body hit, let event pass through for scrolling
         };
 
         const onMouseMove = (e) => {
@@ -149,7 +145,7 @@ function Lanyard() {
             }
         };
 
-        // --- Touch events (mobile) ---
+        // Touch events
         const onTouchStart = (e) => {
             if (e.touches.length !== 1) return;
             const touch = e.touches[0];
@@ -160,10 +156,8 @@ function Lanyard() {
                     active: true, body,
                     offset: { x: pos.x - body.position.x, y: pos.y - body.position.y },
                 };
-                // Prevent scroll ONLY when touching the lanyard
                 e.preventDefault();
             }
-            // If no body hit → don't preventDefault, so page scrolls normally
         };
 
         const onTouchMove = (e) => {
@@ -174,7 +168,7 @@ function Lanyard() {
             const y = pos.y - dragRef.current.offset.y;
             Body.setPosition(dragRef.current.body, { x, y });
             Body.setVelocity(dragRef.current.body, { x: 0, y: 0 });
-            e.preventDefault(); // prevent scroll while dragging
+            e.preventDefault();
         };
 
         const onTouchEnd = () => {
@@ -182,7 +176,6 @@ function Lanyard() {
             dragRef.current.body = null;
         };
 
-        // Attach events — canvas gets mousedown/touchstart, window gets move/up
         canvas.addEventListener('mousedown', onMouseDown);
         window.addEventListener('mousemove', onMouseMove);
         window.addEventListener('mouseup', onMouseUp);
@@ -190,7 +183,6 @@ function Lanyard() {
         window.addEventListener('touchmove', onTouchMove, { passive: false });
         window.addEventListener('touchend', onTouchEnd);
 
-        // Animation loop
         let lastTime = performance.now();
         const loop = (now) => {
             const delta = now - lastTime;
@@ -199,7 +191,6 @@ function Lanyard() {
 
             ctx.clearRect(0, 0, CW_CANVAS, CH_CANVAS);
 
-            // Smooth rope
             const pts = [
                 { x: AX, y: AY },
                 ...links.map(l => l.position),
@@ -213,19 +204,17 @@ function Lanyard() {
                 ctx.quadraticCurveTo(prev.x, prev.y, (prev.x + curr.x) / 2, (prev.y + curr.y) / 2);
             }
             ctx.lineTo(pts[pts.length - 1].x, pts[pts.length - 1].y);
-            ctx.strokeStyle = '#1a1a1a';
+            ctx.strokeStyle = '#30363d';
             ctx.lineWidth = LW;
             ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
             ctx.stroke();
 
-            // Anchor
             ctx.beginPath();
-            ctx.arc(AX, AY, 5, 0, Math.PI * 2);
-            ctx.fillStyle = '#374151';
+            ctx.arc(AX, AY, 4, 0, Math.PI * 2);
+            ctx.fillStyle = '#58a6ff';
             ctx.fill();
 
-            // Sync card — posisi physics di-offset, jadi kurangi offset untuk HTML overlay
             if (cardDivRef.current) {
                 const cx = card.position.x - OFFSET_X;
                 const cy = card.position.y - OFFSET_Y;

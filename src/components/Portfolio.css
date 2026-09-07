@@ -11,21 +11,22 @@
 
 .portfolio-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   gap: 20px;
 }
 
-/* GitHub Repo Card */
+/* GitHub Pinned Repo Card */
 .repo-card {
   background-color: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: var(--radius-md);
-  padding: 20px;
+  padding: 18px 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   transition: var(--transition);
   box-shadow: var(--shadow-sm);
+  position: relative;
 }
 
 .repo-card:hover {
@@ -45,17 +46,22 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  overflow: hidden;
 }
 
 .repo-icon {
   color: var(--text-secondary);
   font-size: 0.95rem;
+  flex-shrink: 0;
 }
 
 .repo-title-link {
-  font-size: 1rem;
+  font-size: 0.98rem;
   font-weight: 600;
   color: var(--accent-blue);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .repo-title-link:hover {
@@ -70,11 +76,12 @@
   border: 1px solid var(--border-color);
   color: var(--text-secondary);
   background-color: var(--bg-tertiary);
+  flex-shrink: 0;
 }
 
 .repo-preview-image {
   width: 100%;
-  height: 180px;
+  height: 175px;
   border-radius: var(--radius-sm);
   overflow: hidden;
   margin-bottom: 14px;
@@ -109,7 +116,7 @@
 }
 
 .repo-tag-pill {
-  font-size: 0.73rem;
+  font-size: 0.72rem;
   padding: 2px 8px;
   border-radius: 4px;
   background-color: var(--bg-primary);
@@ -124,13 +131,15 @@
   padding-top: 12px;
   border-top: 1px solid var(--border-muted);
   font-size: 0.78rem;
+  gap: 8px;
 }
 
 .repo-meta-left {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
   color: var(--text-secondary);
+  flex-wrap: wrap;
 }
 
 .repo-lang {
@@ -160,6 +169,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-shrink: 0;
 }
 
 .btn-repo-link {
@@ -204,13 +214,13 @@
   }
 
   .repo-card-footer {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
   }
 
   .repo-links-right {
-    width: 100%;
     justify-content: flex-end;
   }
 }

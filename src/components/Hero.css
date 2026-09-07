@@ -1,6 +1,6 @@
 .hero {
   position: relative;
-  padding: 135px 0 72px 0;
+  padding: 125px 0 64px 0;
   background-color: var(--bg-primary);
   border-bottom: 1px solid var(--border-color);
 }
@@ -22,7 +22,8 @@
   color: var(--accent-blue);
   font-size: 0.82rem;
   border: 1px solid var(--border-color);
-  margin-bottom: 16px;
+  margin-bottom: 18px;
+  font-family: var(--font-mono);
 }
 
 .terminal-icon {
@@ -30,7 +31,7 @@
 }
 
 .hero-greeting {
-  font-size: 1rem;
+  font-size: 0.95rem;
   color: var(--text-secondary);
   margin-bottom: 6px;
 }
@@ -41,7 +42,7 @@
   color: var(--text-primary);
   line-height: 1.15;
   letter-spacing: -0.02em;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .hero-name span {
@@ -54,7 +55,7 @@
   gap: 8px;
   font-size: 0.88rem;
   color: var(--accent-green-bright);
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
 .dot-divider {
@@ -73,7 +74,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 32px;
+  margin-bottom: 28px;
 }
 
 .hero-tag {
@@ -83,6 +84,7 @@
   padding: 4px 12px;
   border-radius: 20px;
   font-size: 0.78rem;
+  font-family: var(--font-mono);
   background-color: var(--bg-secondary);
   border: 1px solid var(--border-color);
   color: var(--text-primary);
@@ -116,6 +118,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 .lanyard-card-header {
@@ -158,16 +161,17 @@
 /* Mobile App Optimized Layout */
 @media (max-width: 768px) {
   .hero {
-    padding: 72px 0 40px 0;
+    padding: 75px 0 40px 0;
   }
 
   .hero-content {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 28px;
   }
 
   .hero-name {
-    font-size: 1.85rem;
+    font-size: 2rem;
+    line-height: 1.2;
   }
 
   .hero-greeting {
@@ -175,9 +179,9 @@
   }
 
   .hero-role {
-    font-size: 0.88rem;
-    line-height: 1.5;
-    margin-bottom: 18px;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    margin-bottom: 20px;
   }
 
   .hero-tags {
@@ -196,6 +200,6 @@
   }
 
   .lanyard-container-card {
-    max-height: 300px;
+    min-height: 420px;
   }
 }
