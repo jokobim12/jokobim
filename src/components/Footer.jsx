@@ -20,12 +20,13 @@ const socialLinks = [
 ];
 
 const navLinks = [
-    { label: 'Overview', href: '#home' },
+    { label: 'Beranda', href: '#home' },
     { label: 'Tentang', href: '#about' },
-    { label: 'CV', href: '#cv' },
+    { label: 'Banjar Script', href: '#banjar-script' },
     { label: 'Portofolio', href: '#portfolio' },
     { label: 'Prestasi', href: '#prestasi' },
-    { label: 'Aktivitas', href: '#activity' },
+    { label: 'CV', href: '#cv' },
+    { label: 'Aktivitas GitHub', href: '#activity' },
     { label: 'Lokasi', href: '#location' },
     { label: 'Kontak', href: '#contact' },
 ];

@@ -1,125 +1,154 @@
-import { useRef, useCallback } from 'react';
+import {
+  FaUser,
+  FaEnvelope,
+  FaMapMarkerAlt,
+  FaBriefcase,
+  FaCheckCircle,
+  FaCode,
+  FaLayerGroup,
+  FaDatabase,
+  FaAward
+} from 'react-icons/fa';
 import './About.css';
 
-const skills = [
-    'React JS', 'JavaScript', 'HTML', 'CSS', 'Node.js',
-    'Git', 'Figma', 'Python', 'MySQL', 'Tailwind CSS', 'Laravel', 'PHP', 'Bootstrap', 'Photoshop',
-    'Canva',
+const skillCategories = [
+  {
+    title: 'Bahasa Pemrograman',
+    icon: <FaCode />,
+    skills: ['PHP', 'JavaScript (ES6+)', 'Python', 'SQL', 'HTML5 & CSS3', 'Banjar Script'],
+  },
+  {
+    title: 'Framework & Frontend',
+    icon: <FaLayerGroup />,
+    skills: ['Laravel 12', 'React.js', 'Tailwind CSS', 'Bootstrap 5', 'Filament Admin'],
+  },
+  {
+    title: 'Database & Tools',
+    icon: <FaDatabase />,
+    skills: ['MySQL', 'Git & GitHub', 'RESTful API', 'Figma', 'Node.js', 'Vite'],
+  },
 ];
 
 function About() {
-    const cardRef = useRef(null);
-    const shineRef = useRef(null);
-    const rafRef = useRef(null);
+  return (
+    <section className="about section" id="about">
+      <div className="container">
+        {/* Section Header */}
+        <div className="section-header">
+          <div className="section-tag">
+            <FaUser /> Profil Profesional
+          </div>
+          <h2 className="section-title">
+            Mengenal Lebih Dekat <span className="highlight">Joko Bimantaro</span>
+          </h2>
+          <p className="section-subtitle">
+            Perjalanan dedikasi di bidang teknologi informasi, pengembangan perangkat lunak, 
+            dan riset implementasi komputasi praktis.
+          </p>
+        </div>
 
-    const handleMove = useCallback((clientX, clientY) => {
-        const card = cardRef.current;
-        if (!card) return;
-
-        const rect = card.getBoundingClientRect();
-        const x = clientX - rect.left;
-        const y = clientY - rect.top;
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-
-        const rotateY = ((x - centerX) / centerX) * 20;
-        const rotateX = ((centerY - y) / centerY) * 20;
-
-        card.style.transform = `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
-
-        if (shineRef.current) {
-            const px = (x / rect.width) * 100;
-            const py = (y / rect.height) * 100;
-            shineRef.current.style.background = `radial-gradient(circle at ${px}% ${py}%, rgba(255,255,255,0.4) 0%, transparent 55%)`;
-            shineRef.current.style.opacity = '1';
-        }
-    }, []);
-
-    const handleMouseMove = useCallback((e) => {
-        if (rafRef.current) cancelAnimationFrame(rafRef.current);
-        rafRef.current = requestAnimationFrame(() => handleMove(e.clientX, e.clientY));
-    }, [handleMove]);
-
-    const handleTouchMove = useCallback((e) => {
-        if (e.touches.length !== 1) return;
-        if (rafRef.current) cancelAnimationFrame(rafRef.current);
-        rafRef.current = requestAnimationFrame(() =>
-            handleMove(e.touches[0].clientX, e.touches[0].clientY)
-        );
-    }, [handleMove]);
-
-    const handleLeave = useCallback(() => {
-        if (rafRef.current) cancelAnimationFrame(rafRef.current);
-        const card = cardRef.current;
-        if (card) {
-            card.style.transform = 'perspective(600px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-        }
-        if (shineRef.current) {
-            shineRef.current.style.opacity = '0';
-        }
-    }, []);
-
-    return (
-        <section className="about section" id="about">
-            <div className="container">
-                <h2 className="section-title">Tentang <span>Saya</span></h2>
-                <p className="section-subtitle">
-                    Kenali lebih jauh siapa saya dan apa yang saya lakukan.
-                </p>
-
-                <div className="about-content">
-                    <div className="about-photo">
-                        <div
-                            className="about-photo-wrapper tilt-card"
-                            ref={cardRef}
-                            onMouseMove={handleMouseMove}
-                            onMouseLeave={handleLeave}
-                            onTouchMove={handleTouchMove}
-                            onTouchEnd={handleLeave}
-                        >
-                            <img src="/penghargaan.jpg" alt="Jokobim" />
-                            <div className="tilt-shine" ref={shineRef}></div>
-                        </div>
-                    </div>
-
-                    <div className="about-info">
-                        <h3>Halo! Saya Joko Bimantaro</h3>
-                        <p style={{ textAlign: 'justify' }}>
-                            Saya adalah mahasiswa Teknologi Informasi di Politeknik Negeri
-                            Tanah laut. Memiliki ketertarikan dalam bidang teknologi
-                            informasi dan Olahraga. Saya menekuni dunia teknologi sejak saya berusia 16 Tahun.
-                        </p>
-
-                        <div className="about-details">
-                            <div className="about-detail-item">
-                                <strong>Nama:</strong>
-                                <span>Joko Bimantaro</span>
-                            </div>
-                            <div className="about-detail-item">
-                                <strong>Email:</strong>
-                                <span>joko.bimantaro@mhs.politala.ac.id</span>
-                            </div>
-                            <div className="about-detail-item">
-                                <strong>Alamat:</strong>
-                                <span>Takisung - Tanah Laut - Kalsel</span>
-                            </div>
-                            <div className="about-detail-item">
-                                <strong>Status:</strong>
-                                <span>Tersedia untuk kerja</span>
-                            </div>
-                        </div>
-
-                        <h4 className="skills-title">Keahlian</h4>
-                        <div className="skills-list">
-                            {skills.map((skill) => (
-                                <span className="skill-tag" key={skill}>{skill}</span>
-                            ))}
-                        </div>
-                    </div>
+        <div className="about-grid">
+          {/* Left Column: Visual Portrait & Key Highlights */}
+          <div className="about-media-col">
+            <div className="about-image-card">
+              <img
+                src="/penghargaan.jpg"
+                alt="Joko Bimantaro menerima penghargaan di Politala"
+                className="about-image"
+                loading="lazy"
+                width="600"
+                height="800"
+              />
+              <div className="about-image-badge">
+                <FaAward className="award-badge-icon" />
+                <div>
+                  <strong>Best Project 2025</strong>
+                  <span>TEFA IT Politala</span>
                 </div>
+              </div>
             </div>
-        </section>
-    );
+
+            <div className="about-quick-meta">
+              <div className="quick-meta-item">
+                <span className="meta-label">Pendidikan</span>
+                <span className="meta-value">D3 Teknologi Informasi - Politala</span>
+              </div>
+              <div className="quick-meta-item">
+                <span className="meta-label">Domisili</span>
+                <span className="meta-value">Takisung, Tanah Laut, Kalsel</span>
+              </div>
+              <div className="quick-meta-item">
+                <span className="meta-label">Status</span>
+                <span className="meta-value available">
+                  <span className="status-dot"></span> Siap untuk Proyek & Kerja
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column: Bio Narrative & Grouped Skills */}
+          <div className="about-text-col">
+            <div className="bio-block">
+              <h3 className="bio-title">Halo! Saya Joko Bimantaro.</h3>
+              <p className="bio-paragraph">
+                Saya adalah mahasiswa aktif program studi <strong>D3 Teknologi Informasi</strong> di{' '}
+                <strong>Politeknik Negeri Tanah Laut (Politala)</strong>. Kecintaan saya pada dunia rekayasa
+                perangkat lunak berawal sejak usia 16 tahun, di mana saya mulai mendalami logika pemrograman,
+                struktur data, dan arsitektur web modern.
+              </p>
+              <p className="bio-paragraph">
+                Di lingkungan kampus, saya dipercaya berkontribusi sebagai Software Developer di{' '}
+                <strong>Teaching Factory (TEFA) IT Politala</strong> dan aktif membimbing mahasiswa melalui 
+                program bimbingan privat pembuatan web Laravel 12. Bagi saya, kode yang baik bukan hanya tentang 
+                fungsi yang berjalan, tetapi juga performa yang cepat, struktur yang bersih, dan nilai nyata bagi penggunanya.
+              </p>
+            </div>
+
+            {/* Direct Contact Table */}
+            <div className="info-table-card">
+              <div className="info-row">
+                <span className="info-cell-label"><FaEnvelope /> Email</span>
+                <a href="mailto:joko.bimantaro@mhs.politala.ac.id" className="info-cell-value">
+                  joko.bimantaro@mhs.politala.ac.id
+                </a>
+              </div>
+              <div className="info-row">
+                <span className="info-cell-label"><FaBriefcase /> Peran Utama</span>
+                <span className="info-cell-value">Full-Stack Web & Game Developer</span>
+              </div>
+              <div className="info-row">
+                <span className="info-cell-label"><FaMapMarkerAlt /> Lokasi</span>
+                <span className="info-cell-value">Tanah Laut, Kalimantan Selatan, Indonesia</span>
+              </div>
+            </div>
+
+            {/* Skills Grouping */}
+            <div className="skills-container">
+              <h4 className="skills-heading">Keahlian & Ekosistem Teknologi</h4>
+              <div className="skills-categories-grid">
+                {skillCategories.map((cat, i) => (
+                  <div className="skill-cat-card" key={i}>
+                    <div className="skill-cat-header">
+                      <span className="cat-icon">{cat.icon}</span>
+                      <span className="cat-title">{cat.title}</span>
+                    </div>
+                    <div className="skill-cat-items">
+                      {cat.skills.map((skill) => (
+                        <span className="skill-pill" key={skill}>
+                          <FaCheckCircle className="pill-check" />
+                          <span>{skill}</span>
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }
 
 export default About;

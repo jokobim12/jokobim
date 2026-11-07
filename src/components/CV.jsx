@@ -1,6 +1,5 @@
-import { useRef } from 'react';
-import html2pdf from 'html2pdf.js';
-import { FaGraduationCap, FaBriefcase, FaDownload } from 'react-icons/fa';
+import { useRef, useState } from 'react';
+import { FaGraduationCap, FaBriefcase, FaDownload, FaSpinner } from 'react-icons/fa';
 import './CV.css';
 
 const education = [
@@ -47,26 +46,45 @@ const experience = [
 
 function CV() {
     const cvRef = useRef(null);
+    const [downloading, setDownloading] = useState(false);
 
-    const handleDownload = () => {
-        const element = cvRef.current;
-        const opt = {
-            margin: [10, 10, 10, 10],
-            filename: 'CV_Joko_Bimantaro.pdf',
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { scale: 2, useCORS: true },
-            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-        };
-        html2pdf().set(opt).from(element).save();
+    const handleDownload = async () => {
+        if (downloading) return;
+        setDownloading(true);
+        try {
+            const html2pdfModule = await import('html2pdf.js');
+            const html2pdf = html2pdfModule.default || html2pdfModule;
+            const element = cvRef.current;
+            const opt = {
+                margin: [10, 10, 10, 10],
+                filename: 'CV_Joko_Bimantaro.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+            };
+            await html2pdf().set(opt).from(element).save();
+        } catch (err) {
+            console.error('Failed to generate PDF:', err);
+            window.print();
+        } finally {
+            setDownloading(false);
+        }
     };
 
     return (
         <section className="cv section" id="cv">
             <div className="container">
-                <h2 className="section-title">Curriculum <span>Vitae</span></h2>
-                <p className="section-subtitle">
-                    Riwayat pendidikan dan pengalaman kerja saya.
-                </p>
+                <div className="section-header">
+                    <div className="section-tag">
+                        <FaBriefcase /> Riwayat & Karir
+                    </div>
+                    <h2 className="section-title">
+                        Curriculum <span className="highlight">Vitae</span>
+                    </h2>
+                    <p className="section-subtitle">
+                        Rekam jejak pendidikan formal dan pengalaman kerja profesional dalam rekayasa perangkat lunak.
+                    </p>
+                </div>
 
                 <div className="cv-grid" ref={cvRef}>
                     <div className="cv-column">
@@ -99,8 +117,20 @@ function CV() {
                 </div>
 
                 <div className="cv-download">
-                    <button onClick={handleDownload} className="btn btn-primary">
-                        <FaDownload /> Download CV
+                    <button
+                        onClick={handleDownload}
+                        className="btn btn-primary"
+                        disabled={downloading}
+                    >
+                        {downloading ? (
+                            <>
+                                <FaSpinner className="spin-icon" /> Menyiapkan PDF...
+                            </>
+                        ) : (
+                            <>
+                                <FaDownload /> Unduh CV PDF
+                            </>
+                        )}
                     </button>
                 </div>
             </div>

@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
-import Lenis from 'lenis';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
-import CV from './components/CV';
+import BanjarScript from './components/BanjarScript';
 import Portfolio from './components/Portfolio';
 import Prestasi from './components/Prestasi';
+import CV from './components/CV';
 import GithubActivity from './components/GithubActivity';
 import MapSection from './components/MapSection';
 import Contact from './components/Contact';
@@ -15,31 +15,6 @@ function App() {
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem('jokobim-theme') || 'dark';
   });
-
-  // Lenis Smooth Scroll Engine Initialization
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 1.5,
-    });
-
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
-
-    window.lenis = lenis;
-
-    return () => {
-      lenis.destroy();
-      delete window.lenis;
-    };
-  }, []);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -53,14 +28,17 @@ function App() {
   return (
     <>
       <Navbar theme={theme} toggleTheme={toggleTheme} />
-      <Hero />
-      <About />
-      <CV />
-      <Portfolio />
-      <Prestasi />
-      <GithubActivity theme={theme} />
-      <MapSection />
-      <Contact />
+      <main>
+        <Hero />
+        <About />
+        <BanjarScript />
+        <Portfolio />
+        <Prestasi />
+        <CV />
+        <GithubActivity theme={theme} />
+        <MapSection />
+        <Contact />
+      </main>
       <Footer />
     </>
   );

@@ -1,146 +1,284 @@
 .prestasi {
-  background-color: var(--bg-primary);
+  background-color: var(--bg-body);
 }
 
 .prestasi-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 28px;
 }
 
-.prestasi-card {
-  background-color: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: var(--radius-md);
-  overflow: hidden;
+.accolade-card {
   display: flex;
   flex-direction: column;
-  transition: var(--transition);
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
   box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
-.prestasi-card:hover {
-  border-color: var(--accent-blue);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+.accolade-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-lg);
 }
 
-.prestasi-image-wrapper {
+/* Thumbnail */
+.accolade-thumb-box {
   position: relative;
   width: 100%;
-  height: 190px;
-  background-color: var(--bg-tertiary);
+  height: 220px;
+  background-color: var(--bg-surface-elevated);
   overflow: hidden;
-  border-bottom: 1px solid var(--border-muted);
+  cursor: pointer;
 }
 
-.prestasi-image {
+.accolade-thumb-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: var(--transition);
+  object-position: center;
+  transition: transform 0.4s ease;
 }
 
-.prestasi-card:hover .prestasi-image {
-  transform: scale(1.03);
+.accolade-thumb-box:hover .accolade-thumb-img {
+  transform: scale(1.04);
 }
 
-.prestasi-image-overlay {
+.accolade-thumb-overlay {
   position: absolute;
-  top: 12px;
-  right: 12px;
-  background: rgba(13, 17, 23, 0.88);
-  backdrop-filter: blur(4px);
-  border-radius: 50%;
-  width: 38px;
-  height: 38px;
+  inset: 0;
+  background-color: rgba(9, 11, 16, 0.45);
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--border-color);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
 }
 
-.prestasi-icon-large {
-  color: var(--accent-yellow);
-  font-size: 1rem;
-  display: flex;
+.accolade-thumb-box:hover .accolade-thumb-overlay {
+  opacity: 1;
+}
+
+.zoom-btn {
+  display: inline-flex;
   align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  background-color: rgba(0, 0, 0, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  backdrop-filter: blur(8px);
 }
 
-.prestasi-content {
-  padding: 18px 20px;
+.accolade-year-chip {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  background-color: rgba(9, 11, 16, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  font-size: 0.74rem;
+  font-weight: 600;
+  backdrop-filter: blur(8px);
+}
+
+/* Card Body */
+.accolade-body {
+  padding: 22px;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
 }
 
-.prestasi-header {
+.accolade-meta-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  margin-bottom: 8px;
+  gap: 12px;
+  margin-bottom: 14px;
 }
 
-.prestasi-title {
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  letter-spacing: -0.01em;
-}
-
-.prestasi-year {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  padding: 2px 8px;
-  border-radius: 12px;
-  background-color: var(--bg-tertiary);
-  border: 1px solid var(--border-color);
-  color: var(--accent-green-bright);
+.accolade-icon-badge {
+  font-size: 1.35rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  background-color: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
   flex-shrink: 0;
 }
 
-.prestasi-meta {
+.accolade-org-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.accolade-cat {
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent-primary);
+}
+
+.accolade-organizer {
+  font-size: 0.8rem;
+  color: var(--text-tertiary);
+}
+
+.accolade-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.25;
+  margin-bottom: 4px;
+}
+
+.accolade-sub {
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.accolade-desc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.accolade-footer {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-  margin-bottom: 10px;
-  flex-wrap: wrap;
+  justify-content: flex-end;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-subtle);
 }
 
-.prestasi-category {
-  color: var(--accent-blue);
-  font-weight: 500;
-  font-family: var(--font-mono);
+.verified-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--accent-emerald);
 }
 
-.prestasi-dot {
-  color: var(--text-muted);
+.verified-ic {
+  font-size: 0.82rem;
 }
 
-.prestasi-organizer {
+/* Lightbox Modal */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: fadeIn 0.2s ease;
+}
+
+.lightbox-modal {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-hover);
+  border-radius: var(--radius-lg);
+  max-width: 900px;
+  width: 100%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+  animation: scaleUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.lightbox-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-subtle);
+  background-color: var(--bg-surface-elevated);
+}
+
+.lightbox-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.lightbox-close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
   color: var(--text-secondary);
-  font-size: 0.8rem;
+  background: transparent;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: all var(--transition-fast);
 }
 
-.prestasi-desc {
-  font-size: 0.86rem;
-  color: var(--text-secondary);
-  line-height: 1.55;
+.lightbox-close-btn:hover {
+  background-color: var(--bg-surface-hover);
+  color: var(--text-primary);
+}
+
+.lightbox-img-wrapper {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+  max-height: calc(90vh - 65px);
+  background-color: #000000;
+}
+
+.lightbox-img {
+  max-width: 100%;
+  max-height: calc(90vh - 100px);
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleUp {
+  from { transform: scale(0.96); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }
 
 @media (max-width: 768px) {
   .prestasi-grid {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 20px;
   }
-  .prestasi-image-wrapper {
-    height: 170px;
+  .accolade-thumb-box {
+    height: 190px;
   }
-  .prestasi-content {
-    padding: 16px;
+  .accolade-body {
+    padding: 18px;
   }
 }

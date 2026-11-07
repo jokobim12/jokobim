@@ -1,174 +1,241 @@
-import { FaExternalLinkAlt, FaGithub, FaStar, FaCodeBranch, FaBookmark } from 'react-icons/fa';
+import { useState } from 'react';
+import {
+  FaFolderOpen,
+  FaExternalLinkAlt,
+  FaGithub,
+  FaGamepad,
+  FaCode,
+  FaStar,
+  FaCodeBranch
+} from 'react-icons/fa';
 import './Portfolio.css';
 
 const projects = [
-    {
-        title: 'LMS-Bekantan / Computer-Based-Test',
-        repoName: 'LMS-Bekantan',
-        desc: 'Platform Computer Based Test (CBT) interaktif dengan manajemen soal, bank soal, timer ujian, serta penilaian otomatis.',
-        primaryLang: 'PHP',
-        langColor: '#4F5D95',
-        tags: ['Laravel 12', 'MySQL', 'Tailwind CSS', 'Filament'],
-        stars: 12,
-        forks: 5,
-        demo: 'https://cat.beja.biz.id',
-        github: 'https://github.com/jokobim12/LMS-Bekantan',
-        image: '/portfolio/cbt.png',
-    },
-    {
-        title: 'absenhima / Absensi-HIMA-TI',
-        repoName: 'absenhima',
-        desc: 'Sistem absensi digital Himpunan Mahasiswa Teknologi Informasi (HIMA TI) berbasis scan QR Code cepat & rekapan otomatis.',
-        primaryLang: 'PHP',
-        langColor: '#4F5D95',
-        tags: ['PHP Native', 'MySQL', 'Tailwind CSS', 'QR Engine'],
-        stars: 8,
-        forks: 3,
-        demo: 'https://sadhati.kesug.com',
-        github: 'https://github.com/jokobim12/absenhima',
-        image: '/portfolio/absensi.png',
-    },
-    {
-        title: 'tefanote / Service-Logging-System',
-        repoName: 'tefanote',
-        desc: 'Aplikasi web pencatatan layanan Teaching Factory (TEFA) IT Politeknik Negeri Tanah Laut untuk efisiensi workflow mahasiswa.',
-        primaryLang: 'JavaScript',
-        langColor: '#f1e05a',
-        tags: ['ReactJS', 'JavaScript', 'Tailwind CSS'],
-        stars: 15,
-        forks: 6,
-        demo: 'https://tefanote.vercel.app',
-        github: 'https://github.com/jokobim12/tefanote',
-        image: '/portfolio/tefanote.png',
-    },
-    {
-        title: 'siapgrak / Manajemen-Perkuliahan',
-        repoName: 'siapgrak',
-        desc: 'Platform manajemen materi dan tugas perkuliahan yang terintegrasi secara otomatis dengan Google Drive API.',
-        primaryLang: 'PHP',
-        langColor: '#4F5D95',
-        tags: ['PHP Native', 'MySQL', 'Drive API', 'Tailwind CSS'],
-        stars: 7,
-        forks: 2,
-        demo: 'https://siapgrak.kesug.com',
-        github: 'https://github.com/jokobim12/siapgrak',
-        image: '/portfolio/siapgrak.png',
-    },
-    {
-        title: 'jofinku / Task-Reminder-Web',
-        repoName: 'jofinku',
-        desc: 'Website pengingat tugas kuliah interaktif yang terhubung langsung dengan notifikasi WhatsApp API.',
-        primaryLang: 'JavaScript',
-        langColor: '#f1e05a',
-        tags: ['ReactJS', 'WhatsApp API', 'Tailwind CSS'],
-        stars: 10,
-        forks: 4,
-        demo: 'https://jofinku.vercel.app',
-        github: 'https://github.com/jokobim12/jofinku',
-        image: '/portfolio/jofinku.png',
-    },
-    {
-        title: 'webbuku / Novel-Reading-Platform',
-        repoName: 'webbuku',
-        desc: 'Web portal membaca dan menulis cerita novel online yang dilengkapi dashboard manajemen penulis & pembaca.',
-        primaryLang: 'PHP',
-        langColor: '#4F5D95',
-        tags: ['PHP Native', 'MySQL', 'Tailwind CSS'],
-        stars: 6,
-        forks: 2,
-        demo: 'https://webbuku.kesug.com',
-        github: 'https://github.com/jokobim12/webbuku',
-        image: '/portfolio/webbuku.png',
-    },
+  {
+    id: 'niskala-masa',
+    title: 'Niskala Masa',
+    subtitle: 'Interactive Adventure Game',
+    category: 'Game',
+    featured: true,
+    badgeText: 'Finalis KMIPN 2026',
+    desc: 'Game interaktif dengan visual atmosferik dan narasi mendalam yang berhasil lolos menjadi Finalis Kejuaraan Nasional Mahasiswa Bidang Informatika dan Komputer (KMIPN) 2026 Kategori Game Development.',
+    techs: ['Game Engine', 'JavaScript', 'Interactive Audio', 'Web Game'],
+    demo: 'https://niskala-masa.vercel.app/',
+    github: 'https://github.com/jokobim12',
+    image: '/KMIPN.png',
+  },
+  {
+    id: 'lms-bekantan',
+    title: 'LMS-Bekantan',
+    subtitle: 'Computer-Based-Test (CBT)',
+    category: 'Web App',
+    featured: true,
+    badgeText: 'Laravel 12 & Filament',
+    desc: 'Platform Computer Based Test (CBT) komprehensif dengan manajemen bank soal multi-kategori, timer ujian otomatis, anti-kecurangan, dan rekapitulasi penilaian real-time.',
+    techs: ['Laravel 12', 'Filament Admin', 'MySQL', 'Tailwind CSS'],
+    stars: 12,
+    forks: 5,
+    demo: 'https://cat.beja.biz.id',
+    github: 'https://github.com/jokobim12/LMS-Bekantan',
+    image: '/portfolio/cbt.png',
+  },
+  {
+    id: 'absen-hima',
+    title: 'Absensi HIMA TI',
+    subtitle: 'QR Attendance System',
+    category: 'Sistem Kampus',
+    badgeText: 'Produksi Organisasi',
+    desc: 'Sistem presensi digital berbasis pemindaian QR Code cepat dan rekapan data otomatis untuk kegiatan Himpunan Mahasiswa Teknologi Informasi Politala.',
+    techs: ['PHP Native', 'MySQL', 'QR Engine', 'Tailwind CSS'],
+    stars: 8,
+    forks: 3,
+    demo: 'https://sadhati.kesug.com',
+    github: 'https://github.com/jokobim12/absenhima',
+    image: '/portfolio/absensi.png',
+  },
+  {
+    id: 'tefa-note',
+    title: 'TEFA Note',
+    subtitle: 'Service Logging System',
+    category: 'Sistem Kampus',
+    badgeText: 'TEFA IT Politala',
+    desc: 'Aplikasi pencatatan layanan Teaching Factory (TEFA) IT Politeknik Negeri Tanah Laut untuk monitoring pekerjaan, inventaris, dan efisiensi workflow mahasiswa.',
+    techs: ['React JS', 'JavaScript', 'Tailwind CSS', 'Vite'],
+    stars: 15,
+    forks: 6,
+    demo: 'https://tefanote.vercel.app',
+    github: 'https://github.com/jokobim12/tefanote',
+    image: '/portfolio/tefanote.png',
+  },
+  {
+    id: 'siapgrak',
+    title: 'SiapGrak',
+    subtitle: 'Manajemen Perkuliahan Terpadu',
+    category: 'Web App',
+    badgeText: 'Google Drive API',
+    desc: 'Platform terpusat pengarsipan materi dan penyerahan tugas perkuliahan yang terintegrasi secara otomatis dengan Google Drive API untuk penyimpanan cloud.',
+    techs: ['PHP', 'MySQL', 'Drive API', 'Tailwind CSS'],
+    stars: 7,
+    forks: 2,
+    demo: 'https://siapgrak.kesug.com',
+    github: 'https://github.com/jokobim12/siapgrak',
+    image: '/portfolio/siapgrak.png',
+  },
+  {
+    id: 'jofinku',
+    title: 'Jofinku',
+    subtitle: 'Task Reminder WhatsApp API',
+    category: 'Web App',
+    badgeText: 'WhatsApp Integration',
+    desc: 'Aplikasi manajemen tugas dan pengingat deadline kuliah interaktif yang langsung mengirimkan notifikasi otomatis ke nomor WhatsApp pengguna.',
+    techs: ['React JS', 'WhatsApp API', 'Tailwind CSS'],
+    stars: 10,
+    forks: 4,
+    demo: 'https://jofinku.vercel.app',
+    github: 'https://github.com/jokobim12/jofinku',
+    image: '/portfolio/jofinku.png',
+  },
+  {
+    id: 'webbuku',
+    title: 'WebBuku',
+    subtitle: 'Novel Reading Platform',
+    category: 'Web App',
+    badgeText: 'Content Portal',
+    desc: 'Portal web membaca dan mempublikasikan karya novel secara daring, dilengkapi panel manajemen penulis, sistem bab, dan analytics pembaca.',
+    techs: ['PHP', 'MySQL', 'Tailwind CSS'],
+    stars: 6,
+    forks: 2,
+    demo: 'https://webbuku.kesug.com',
+    github: 'https://github.com/jokobim12/webbuku',
+    image: '/portfolio/webbuku.png',
+  },
 ];
 
+const categories = ['Semua', 'Web App', 'Game', 'Sistem Kampus'];
+
 function Portfolio() {
-    return (
-        <section className="portfolio section" id="portfolio">
-            <div className="container">
-                <div className="portfolio-header">
-                    <h2 className="section-title">
-                        <FaBookmark /> Pinned <span>Repositories</span>
-                    </h2>
-                    <span className="badge font-mono">6 Featured Projects</span>
-                </div>
-                <p className="section-subtitle">
-                    Koleksi proyek unggulan yang saya kembangkan dengan standar GitHub repository modern.
-                </p>
+  const [activeFilter, setActiveFilter] = useState('Semua');
 
-                <div className="portfolio-grid">
-                    {projects.map((project, i) => (
-                        <div className="repo-card" key={i}>
-                            <div className="repo-card-top">
-                                <div className="repo-card-title-group">
-                                    <FaBookmark className="repo-icon" />
-                                    <a
-                                        href={project.github}
-                                        target="_blank"
-                                        rel="noreferrer"
-                                        className="repo-title-link font-mono"
-                                    >
-                                        {project.repoName}
-                                    </a>
-                                    <span className="repo-visibility-badge">Public</span>
-                                </div>
-                            </div>
+  const filteredProjects = activeFilter === 'Semua'
+    ? projects
+    : projects.filter((p) => p.category === activeFilter);
 
-                            {project.image && (
-                                <div className="repo-preview-image">
-                                    <img src={project.image} alt={project.title} loading="lazy" />
-                                </div>
-                            )}
-
-                            <p className="repo-desc">{project.desc}</p>
-
-                            <div className="repo-tags-list">
-                                {project.tags.map((tag) => (
-                                    <span className="repo-tag-pill font-mono" key={tag}>{tag}</span>
-                                ))}
-                            </div>
-
-                            <div className="repo-card-footer">
-                                <div className="repo-meta-left">
-                                    <span className="repo-lang font-mono">
-                                        <span className="lang-dot" style={{ backgroundColor: project.langColor }}></span>
-                                        {project.primaryLang}
-                                    </span>
-                                    <span className="repo-stat font-mono">
-                                        <FaStar className="stat-ic" /> {project.stars}
-                                    </span>
-                                    <span className="repo-stat font-mono">
-                                        <FaCodeBranch className="stat-ic" /> {project.forks}
-                                    </span>
-                                </div>
-
-                                <div className="repo-links-right">
-                                    <a
-                                        href={project.demo}
-                                        target="_blank"
-                                        rel="noreferrer"
-                                        className="btn-repo-link demo"
-                                        title="Live Website Demo"
-                                    >
-                                        <FaExternalLinkAlt /> Live
-                                    </a>
-                                    <a
-                                        href={project.github}
-                                        target="_blank"
-                                        rel="noreferrer"
-                                        className="btn-repo-link gh"
-                                        title="GitHub Repository"
-                                    >
-                                        <FaGithub /> Code
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
+  return (
+    <section className="portfolio section" id="portfolio">
+      <div className="container">
+        {/* Section Header */}
+        <div className="portfolio-top-bar">
+          <div className="section-header" style={{ marginBottom: 0 }}>
+            <div className="section-tag">
+              <FaFolderOpen /> Koleksi Karya
             </div>
-        </section>
-    );
+            <h2 className="section-title">
+              Portofolio & <span className="highlight">Proyek Unggulan</span>
+            </h2>
+            <p className="section-subtitle">
+              Pilihan sistem aplikasi, website produksi, dan game yang dirancang dengan arsitektur bersih serta performa optimal.
+            </p>
+          </div>
+
+          {/* Filter Tabs */}
+          <div className="portfolio-filters">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                className={`filter-btn ${activeFilter === cat ? 'active' : ''}`}
+                onClick={() => setActiveFilter(cat)}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Project Grid */}
+        <div className="portfolio-grid">
+          {filteredProjects.map((item) => (
+            <article className={`project-card ${item.featured ? 'featured' : ''}`} key={item.id}>
+              {/* Media Preview */}
+              <div className="project-image-box">
+                <img
+                  src={item.image}
+                  alt={`Preview ${item.title}`}
+                  className="project-image"
+                  loading="lazy"
+                  width="600"
+                  height="340"
+                />
+                <div className="project-badge-pill">
+                  {item.category === 'Game' && <FaGamepad className="badge-ic" />}
+                  <span>{item.badgeText}</span>
+                </div>
+              </div>
+
+              {/* Body Content */}
+              <div className="project-body">
+                <div className="project-title-group">
+                  <h3 className="project-title">{item.title}</h3>
+                  <span className="project-subtitle">{item.subtitle}</span>
+                </div>
+
+                <p className="project-desc">{item.desc}</p>
+
+                {/* Tech Pills */}
+                <div className="project-tech-tags">
+                  {item.techs.map((tech) => (
+                    <span className="tech-tag" key={tech}>
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Footer Actions */}
+                <div className="project-footer">
+                  <div className="project-stats font-mono">
+                    {item.stars !== undefined && (
+                      <span className="stat-pill" title="Stars">
+                        <FaStar className="star-ic" /> {item.stars}
+                      </span>
+                    )}
+                    {item.forks !== undefined && (
+                      <span className="stat-pill" title="Forks">
+                        <FaCodeBranch className="fork-ic" /> {item.forks}
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="project-links">
+                    {item.demo && (
+                      <a
+                        href={item.demo}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="btn-action demo"
+                        title="Buka Website Langsung"
+                      >
+                        <FaExternalLinkAlt /> Live Demo
+                      </a>
+                    )}
+                    {item.github && (
+                      <a
+                        href={item.github}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="btn-action gh"
+                        title="Lihat Kode di GitHub"
+                      >
+                        <FaGithub /> Kode
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }
 
 export default Portfolio;

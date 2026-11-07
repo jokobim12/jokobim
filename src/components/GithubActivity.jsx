@@ -121,15 +121,18 @@ function GithubActivity({ theme }) {
     return (
         <section className="github-activity section" id="activity">
             <div className="container">
-                <div className="github-activity-header">
+                <div className="section-header">
+                    <div className="section-tag">
+                        <FaGithub /> Aktivitas Open Source
+                    </div>
                     <h2 className="section-title">
-                        <FaGithub /> Aktivitas <span>GitHub</span>
+                        Aktivitas <span className="highlight">GitHub</span>
                     </h2>
-                    <span className="badge font-mono">@jokobim12</span>
+                    <p className="section-subtitle">
+                        Grafik kontribusi commit harian, repository publik, dan aktivitas coding real-time dari akun{' '}
+                        <strong className="font-mono">@jokobim12</strong>.
+                    </p>
                 </div>
-                <p className="section-subtitle">
-                    Grafik kontribusi commit dan aktivitas coding terkini dari akun GitHub saya.
-                </p>
 
                 {/* Highlight Stats Row */}
                 <div className="gh-stats-row">

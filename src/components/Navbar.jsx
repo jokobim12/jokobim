@@ -1,161 +1,171 @@
 import { useState, useEffect } from 'react';
 import {
-    FaSun,
-    FaMoon,
-    FaGithub,
-    FaBookOpen,
-    FaUser,
-    FaFileAlt,
-    FaFolderOpen,
-    FaTrophy,
-    FaChartLine,
-    FaMapMarkerAlt,
-    FaEnvelope
+  FaSun,
+  FaMoon,
+  FaBars,
+  FaTimes,
+  FaCode,
+  FaFolderOpen,
+  FaTrophy,
+  FaUser,
+  FaEnvelope,
+  FaFileAlt
 } from 'react-icons/fa';
 import './Navbar.css';
 
-const navItems = [
-    { label: 'Overview', href: '#home', icon: <FaBookOpen /> },
-    { label: 'Tentang', href: '#about', icon: <FaUser /> },
-    { label: 'CV', href: '#cv', icon: <FaFileAlt /> },
-    { label: 'Portofolio', href: '#portfolio', icon: <FaFolderOpen />, badge: '6' },
-    { label: 'Prestasi', href: '#prestasi', icon: <FaTrophy />, badge: '3' },
-    { label: 'Aktivitas', href: '#activity', icon: <FaChartLine /> },
-    { label: 'Lokasi', href: '#location', icon: <FaMapMarkerAlt /> },
-    { label: 'Kontak', href: '#contact', icon: <FaEnvelope /> },
-];
-
-// 5 Main Tabs for Mobile Bottom App Dock
-const mobileDockItems = [
-    { label: 'Home', href: '#home', icon: <FaBookOpen /> },
-    { label: 'About', href: '#about', icon: <FaUser /> },
-    { label: 'Repos', href: '#portfolio', icon: <FaFolderOpen /> },
-    { label: 'Activity', href: '#activity', icon: <FaChartLine /> },
-    { label: 'Contact', href: '#contact', icon: <FaEnvelope /> },
+const navLinks = [
+  { label: 'Tentang', href: '#about', icon: <FaUser /> },
+  { label: 'Banjar Script', href: '#banjar-script', icon: <FaCode />, badge: 'Bahasa' },
+  { label: 'Portofolio', href: '#portfolio', icon: <FaFolderOpen /> },
+  { label: 'Prestasi', href: '#prestasi', icon: <FaTrophy /> },
+  { label: 'CV', href: '#cv', icon: <FaFileAlt /> },
+  { label: 'Kontak', href: '#contact', icon: <FaEnvelope /> },
 ];
 
 function Navbar({ theme, toggleTheme }) {
-    const [scrolled, setScrolled] = useState(false);
-    const [activeSection, setActiveSection] = useState('#home');
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('#home');
 
-    useEffect(() => {
-        const onScroll = () => {
-            setScrolled(window.scrollY > 20);
+  useEffect(() => {
+    let ticking = false;
 
-            const sections = navItems.map(item => item.href.slice(1));
-            let current = '#home';
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 30);
 
-            for (const id of sections) {
-                const el = document.getElementById(id);
-                if (el) {
-                    const rect = el.getBoundingClientRect();
-                    if (rect.top <= 180) {
-                        current = '#' + id;
-                    }
-                }
+          const sections = ['home', 'about', 'banjar-script', 'portfolio', 'prestasi', 'cv', 'contact'];
+          const scrollPos = window.scrollY + 120;
+
+          for (const id of sections) {
+            const el = document.getElementById(id);
+            if (el) {
+              const top = el.offsetTop;
+              const height = el.offsetHeight;
+              if (scrollPos >= top && scrollPos < top + height) {
+                setActiveSection(`#${id}`);
+                break;
+              }
             }
-
-            setActiveSection(current);
-        };
-
-        window.addEventListener('scroll', onScroll);
-        return () => window.removeEventListener('scroll', onScroll);
-    }, []);
-
-    const handleLinkClick = (e, href) => {
-        e.preventDefault();
-
-        if (window.lenis) {
-            window.lenis.scrollTo(href, { offset: -80, duration: 1.2 });
-        } else {
-            const target = document.querySelector(href);
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth' });
-            }
-        }
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
-    return (
-        <>
-            {/* Main Header Bar */}
-            <header className={`navbar-header${scrolled ? ' scrolled' : ''}`}>
-                <div className="navbar-top-bar">
-                    <div className="container navbar-top-container">
-                        <div className="navbar-brand-group">
-                            <a
-                                href="https://github.com/jokobim12"
-                                target="_blank"
-                                rel="noreferrer"
-                                className="navbar-github-icon"
-                                title="GitHub Profile @jokobim12"
-                            >
-                                <FaGithub />
-                            </a>
-                            <a
-                                href="#home"
-                                onClick={(e) => handleLinkClick(e, '#home')}
-                                className="navbar-brand-name font-mono"
-                            >
-                                jokobim12<span className="repo-slash">/</span><span className="repo-name">portfolio</span>
-                            </a>
-                            <span className="navbar-status-pill">
-                                <span className="status-dot"></span> Available for hire
-                            </span>
-                        </div>
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-                        <div className="navbar-actions-group">
-                            <button
-                                className="theme-toggle-btn font-mono"
-                                onClick={toggleTheme}
-                                aria-label="Toggle theme"
-                                title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-                            >
-                                {theme === 'dark' ? <FaSun className="sun-icon" /> : <FaMoon className="moon-icon" />}
-                                <span>{theme === 'dark' ? 'Light' : 'Dark'}</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+  const handleNavClick = (e, href) => {
+    e.preventDefault();
+    setMobileMenuOpen(false);
+    const target = document.querySelector(href);
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
-                {/* Desktop Tabs Bar */}
-                <div className="navbar-tabs-bar desktop-only">
-                    <div className="container navbar-tabs-container">
-                        <nav className="gh-tabs-nav">
-                            {navItems.map((item) => (
-                                <a
-                                    key={item.href}
-                                    href={item.href}
-                                    className={`gh-tab-item ${activeSection === item.href ? 'active' : ''}`}
-                                    onClick={(e) => handleLinkClick(e, item.href)}
-                                >
-                                    <span className="tab-icon">{item.icon}</span>
-                                    <span className="tab-label">{item.label}</span>
-                                    {item.badge && <span className="tab-count-badge font-mono">{item.badge}</span>}
-                                </a>
-                            ))}
-                        </nav>
-                    </div>
-                </div>
-            </header>
+  return (
+    <header className={`navbar ${scrolled ? 'navbar-scrolled' : ''}`}>
+      <div className="container navbar-container">
+        {/* Brand */}
+        <a href="#home" className="navbar-brand" onClick={(e) => handleNavClick(e, '#home')}>
+          <div className="brand-badge">JB</div>
+          <div className="brand-info">
+            <span className="brand-name">Joko Bimantaro</span>
+            <span className="brand-status">
+              <span className="status-dot"></span>
+              Tersedia untuk kerja
+            </span>
+          </div>
+        </a>
 
-            {/* Mobile App Bottom Dock */}
-            <nav className="mobile-app-dock mobile-only" aria-label="Mobile Bottom Navigation">
-                <div className="mobile-dock-container">
-                    {mobileDockItems.map((item) => (
-                        <a
-                            key={item.href}
-                            href={item.href}
-                            className={`mobile-dock-item ${activeSection === item.href ? 'active' : ''}`}
-                            onClick={(e) => handleLinkClick(e, item.href)}
-                        >
-                            <span className="dock-icon">{item.icon}</span>
-                            <span className="dock-label font-mono">{item.label}</span>
-                        </a>
-                    ))}
-                </div>
-            </nav>
-        </>
-    );
+        {/* Desktop Navigation */}
+        <nav className="navbar-links" aria-label="Navigasi Utama">
+          {navLinks.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className={`nav-link ${activeSection === item.href ? 'active' : ''}`}
+              onClick={(e) => handleNavClick(e, item.href)}
+            >
+              {item.label}
+              {item.badge && <span className="nav-pill">{item.badge}</span>}
+            </a>
+          ))}
+        </nav>
+
+        {/* Action Buttons */}
+        <div className="navbar-actions">
+          <button
+            className="theme-btn"
+            onClick={toggleTheme}
+            aria-label={theme === 'dark' ? 'Ganti ke tema terang' : 'Ganti ke tema gelap'}
+            title={theme === 'dark' ? 'Mode Terang' : 'Mode Gelap'}
+          >
+            {theme === 'dark' ? <FaSun className="icon-sun" /> : <FaMoon className="icon-moon" />}
+          </button>
+
+          <a
+            href="#contact"
+            className="btn btn-primary btn-sm desktop-only"
+            onClick={(e) => handleNavClick(e, '#contact')}
+          >
+            Hubungi
+          </a>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="mobile-toggle"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label={mobileMenuOpen ? 'Tutup menu' : 'Buka menu'}
+          >
+            {mobileMenuOpen ? <FaTimes /> : <FaBars />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Drawer */}
+      <div className={`mobile-drawer ${mobileMenuOpen ? 'open' : ''}`}>
+        <div className="mobile-drawer-content">
+          <div className="mobile-links">
+            <a
+              href="#home"
+              className={`mobile-link ${activeSection === '#home' ? 'active' : ''}`}
+              onClick={(e) => handleNavClick(e, '#home')}
+            >
+              Beranda
+            </a>
+            {navLinks.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className={`mobile-link ${activeSection === item.href ? 'active' : ''}`}
+                onClick={(e) => handleNavClick(e, item.href)}
+              >
+                <span className="mobile-link-icon">{item.icon}</span>
+                <span>{item.label}</span>
+                {item.badge && <span className="nav-pill">{item.badge}</span>}
+              </a>
+            ))}
+          </div>
+          <div className="mobile-drawer-footer">
+            <a
+              href="#contact"
+              className="btn btn-primary"
+              style={{ width: '100%' }}
+              onClick={(e) => handleNavClick(e, '#contact')}
+            >
+              Hubungi Saya
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+  );
 }
 
 export default Navbar;
