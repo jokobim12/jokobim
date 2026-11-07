@@ -21,11 +21,23 @@ const education = [
         place: 'MTs Al-Irsyad Takisung',
         desc: 'Fokus pendalaman Agama Islam',
     },
+    {
+        date: '2011 - 2018',
+        title: 'SDN Gunung Makmur',
+        place: 'Sumber Makmur',
+        desc: 'Fokus pendidikan dasar',
+    },
 ];
 
 const experience = [
     {
-        date: '2025 - Sekarang',
+        date: '2026 - 2027',
+        title: 'Mahasiswa Magang - Smart Kampus Politala',
+        place: 'Politeknik Negeri Tanah Laut',
+        desc: 'Menjadi bagian dari mahasiswa magang smart kampus politala.',
+    },
+    {
+        date: '2026 - 2026',
         title: 'Software Developer - TEFA IT Politala',
         place: 'Politeknik Negeri Tanah Laut',
         desc: 'Membangun website dan aplikasi web untuk klien dari berbagai industri.',
@@ -37,7 +49,7 @@ const experience = [
         desc: 'Mengajar Mahasiswa/i dalam pembuatan website berbasis laravel 12',
     },
     {
-        date: '2025 - Sekarang',
+        date: '2024 - 2026',
         title: 'HIMA TI Politala',
         place: 'Politeknik Negeri Tanah Laut',
         desc: 'Menjadi bagian dari Himpunan Mahasiswa Teknologi Informasi',

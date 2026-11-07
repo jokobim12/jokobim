@@ -1,3 +1,4 @@
+/* Banjar Script Section */
 .banjar-script {
   background-color: var(--barca-white);
   border-top: 2px solid var(--border-subtle);
@@ -11,18 +12,78 @@
   align-items: start;
 }
 
-/* IDE Card */
-.bjr-ide-card {
-  background-color: #0b1526;
-  border: 2px solid var(--barca-blue);
-  border-radius: var(--radius-sm);
+/* ========================================================
+   AUTHENTIC MACBOOK TERMINAL / CODE WINDOW (macOS Dark)
+   Tanpa warna biru/merah/hitam Barcelona di jendela terminal.
+   Tanpa gradient & tanpa shadow.
+   ======================================================== */
+.mac-terminal-window {
+  background-color: #1e1e1e;
+  border: 1px solid #333333;
+  border-radius: 10px;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
-.bjr-ide-header {
-  background-color: var(--barca-blue-dark);
-  border-bottom: 2px solid var(--barca-red);
-  padding: 10px 14px;
+/* macOS Title Bar */
+.mac-titlebar {
+  background-color: #282828;
+  border-bottom: 1px solid #333333;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  user-select: none;
+}
+
+.mac-traffic-lights {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 60px;
+}
+
+.mac-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.mac-red {
+  background-color: #ff5f56;
+  border: 1px solid #e0443e;
+}
+
+.mac-yellow {
+  background-color: #ffbd2e;
+  border: 1px solid #dea125;
+}
+
+.mac-green {
+  background-color: #27c93f;
+  border: 1px solid #1aab29;
+}
+
+.mac-window-title {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+.mac-spacer {
+  width: 60px;
+}
+
+/* Editor Toolbar (Tabs & Action Buttons) */
+.mac-editor-toolbar {
+  background-color: #212121;
+  border-bottom: 1px solid #333333;
+  padding: 8px 14px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -30,144 +91,311 @@
   flex-wrap: wrap;
 }
 
-.bjr-window-dots {
+.mac-tab-group {
   display: flex;
-  gap: 6px;
-}
-
-.bjr-window-dots .dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-}
-
-.dot.red { background-color: var(--barca-red); }
-.dot.yellow { background-color: #ffffff; }
-.dot.green { background-color: #3b82f6; }
-
-.bjr-tabs {
-  display: flex;
+  align-items: center;
   gap: 4px;
   overflow-x: auto;
 }
 
-.bjr-tab {
+.mac-tab-btn {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   padding: 6px 12px;
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   font-family: var(--font-mono);
-  font-weight: 700;
-  color: #c4d3e8;
-  border-radius: var(--radius-sm);
-  background: transparent;
+  font-weight: 600;
+  color: #8a8a8e;
+  border-radius: 6px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
   transition: all var(--transition-fast);
 }
 
-.bjr-tab:hover {
-  color: #ffffff;
-  background-color: rgba(255, 255, 255, 0.1);
+.mac-tab-btn .tab-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #636366;
 }
 
-.bjr-tab.active {
+.mac-tab-btn:hover {
   color: #ffffff;
-  background-color: var(--barca-blue);
-  border: 1px solid #3b82f6;
+  background-color: #2c2c2e;
 }
 
-.bjr-header-actions {
+.mac-tab-btn.active {
+  color: #ffffff;
+  background-color: #323234;
+}
+
+.mac-tab-btn.active .tab-dot {
+  background-color: #27c93f;
+}
+
+.mac-action-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mac-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 11px;
+  font-size: 0.74rem;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  border: 1px solid #3a3a3c;
+  background-color: #2c2c2e;
+  color: #f5f5f7;
+}
+
+.mac-btn:hover {
+  background-color: #3a3a3c;
+  color: #ffffff;
+}
+
+.mac-reset-btn {
+  color: #d1d5db;
+}
+
+.mac-copy-btn .icon-copied {
+  color: #34d399;
+}
+
+.mac-run-btn {
+  background-color: #238636;
+  border-color: #2ea043;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.mac-run-btn:hover {
+  background-color: #2ea043;
+}
+
+.spin-run {
+  animation: spinRun 0.6s linear infinite;
+}
+
+@keyframes spinRun {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Hint Banner */
+.mac-editor-hint {
+  background-color: #262626;
+  border-bottom: 1px solid #333333;
+  padding: 8px 16px;
+  font-size: 0.75rem;
+  color: #d1d5db;
   display: flex;
   align-items: center;
   gap: 8px;
+  line-height: 1.4;
 }
 
-.bjr-action-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 5px 10px;
-  font-size: 0.75rem;
-  font-family: var(--font-mono);
-  font-weight: 700;
-  color: #ffffff;
-  border-radius: var(--radius-sm);
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: all var(--transition-fast);
-}
-
-.bjr-action-btn:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-}
-
-.icon-success {
-  color: #93c5fd;
-}
-
-.bjr-run-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
-  font-size: 0.75rem;
-  font-family: var(--font-mono);
+.hint-pill {
+  background-color: #38383a;
+  color: #38bdf8;
+  font-size: 0.65rem;
   font-weight: 800;
-  color: #ffffff;
-  background-color: var(--barca-red);
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--barca-red-dark);
-  transition: all var(--transition-fast);
-}
-
-.bjr-run-btn:hover {
-  background-color: var(--barca-red-dark);
+  padding: 2px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
 }
 
 /* Code Viewport */
-.bjr-code-viewport {
-  padding: 20px;
+.mac-code-viewport {
+  background-color: #1e1e1e;
+  padding: 22px 20px;
   overflow-x: auto;
-  background-color: #0b1526;
+  min-height: 220px;
 }
 
-.bjr-code-pre {
-  color: #f0f4fa;
+.code-canvas {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.code-line {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
   font-size: 0.88rem;
   line-height: 1.7;
+  color: #c9d1d9;
 }
 
-/* Terminal */
-.bjr-terminal {
-  background-color: #060d19;
-  border-top: 2px solid var(--barca-blue);
-  padding: 14px 18px;
+.code-line.indent {
+  padding-left: 24px;
 }
 
-.terminal-header {
+.code-line.comment {
+  color: #7f848e;
+  font-style: italic;
+  margin-bottom: 4px;
+}
+
+.code-line.empty-line {
+  height: 8px;
+}
+
+/* Syntax Highlighting */
+.kw-def {
+  color: #ff7b72;
+  font-weight: 700;
+}
+
+.kw-control {
+  color: #d2a8ff;
+  font-weight: 700;
+}
+
+.kw-func {
+  color: #79c0ff;
+  font-weight: 700;
+}
+
+.var-name {
+  color: #e5c07b;
+  font-weight: 600;
+}
+
+.op {
+  color: #56b6c2;
+}
+
+.punc {
+  color: #c9d1d9;
+}
+
+.str-quote {
+  color: #7ee787;
+  font-weight: 700;
+}
+
+.str-val {
+  color: #7ee787;
+}
+
+.num-val {
+  color: #ffa657;
+  font-weight: 600;
+}
+
+/* Inline Editable Input Fields */
+.mac-inline-input {
+  font-family: inherit;
+  font-size: 0.86rem;
+  color: #7ee787;
+  background-color: #282c34;
+  border: 1px dashed #58a6ff;
+  border-radius: 4px;
+  padding: 1px 6px;
+  margin: 0 1px;
+  line-height: 1.4;
+  transition: all var(--transition-fast);
+  outline: none;
+}
+
+.mac-inline-input:hover {
+  border-color: #79c0ff;
+  background-color: #2c313a;
+}
+
+.mac-inline-input:focus {
+  border: 1px solid #38bdf8;
+  background-color: #1f232a;
+  color: #a3e635;
+}
+
+.mac-inline-input.num-input {
+  color: #ffa657;
+  text-align: center;
+}
+
+/* macOS Terminal Console (Output) */
+.mac-terminal-console {
+  background-color: #141414;
+  border-top: 1px solid #333333;
+  padding: 16px 20px;
+}
+
+.mac-console-header {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 700;
-  color: #93c5fd;
-  margin-bottom: 8px;
+  color: #6e7681;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  margin-bottom: 8px;
 }
 
-.term-ic {
-  color: var(--barca-red);
+.console-icon {
+  font-size: 0.78rem;
+  color: #38bdf8;
 }
 
-.terminal-output {
-  font-size: 0.82rem;
-  color: #ffffff;
-  line-height: 1.5;
+.mac-console-prompt {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.prompt-user {
+  color: #34d399;
+  font-weight: 700;
+}
+
+.prompt-sep {
+  color: #8b949e;
+}
+
+.prompt-dir {
+  color: #38bdf8;
+  font-weight: 600;
+}
+
+.prompt-sign {
+  color: #f0f6fc;
+  font-weight: 700;
+}
+
+.prompt-cmd {
+  color: #e6edf3;
+}
+
+.mac-console-output {
+  margin: 0;
+  font-family: inherit;
+  font-size: 0.84rem;
+  line-height: 1.6;
+  color: #f0f6fc;
   white-space: pre-wrap;
+  word-break: break-word;
 }
 
-/* Right Info Card */
+/* ========================================================
+   RIGHT COLUMN: Technical Architecture & Lexical Info
+   (Menggunakan palet Barcelona untuk area dokumen luar)
+   ======================================================== */
 .bjr-info-card {
   background-color: var(--barca-white);
   border: 2px solid var(--barca-blue);
@@ -254,7 +482,12 @@
   flex-wrap: wrap;
 }
 
-@media (max-width: 960px) {
+.bjr-card-cta .btn {
+  box-shadow: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
   .bjr-grid {
     grid-template-columns: 1fr;
     gap: 24px;
@@ -262,11 +495,43 @@
 }
 
 @media (max-width: 600px) {
-  .bjr-tabs {
-    flex-wrap: nowrap;
+  .mac-titlebar {
+    padding: 0 10px;
+  }
+
+  .mac-window-title {
+    font-size: 0.68rem;
+  }
+
+  .mac-editor-toolbar {
+    padding: 8px 10px;
+    gap: 8px;
+  }
+
+  .mac-tab-group {
+    width: 100%;
+    margin-bottom: 4px;
+  }
+
+  .mac-action-group {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .mac-code-viewport {
+    padding: 16px 12px;
+  }
+
+  .mac-terminal-console {
+    padding: 14px 12px;
+  }
+
+  .mac-inline-input {
+    max-width: 100%;
   }
 
   .bjr-card-cta .btn {
     width: 100%;
+    justify-content: center;
   }
 }
