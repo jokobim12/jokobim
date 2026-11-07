@@ -4,7 +4,7 @@ import {
   FaExternalLinkAlt,
   FaGithub,
   FaGamepad,
-  FaCode,
+  FaDownload,
   FaStar,
   FaCodeBranch
 } from 'react-icons/fa';
@@ -14,12 +14,12 @@ const projects = [
   {
     id: 'niskala-masa',
     title: 'Niskala Masa',
-    subtitle: 'Interactive Adventure Game',
+    subtitle: 'Simulasi Perkuliahan (PC & Linux)',
     category: 'Game',
     featured: true,
     badgeText: 'Finalis KMIPN 2026',
-    desc: 'Game interaktif dengan visual atmosferik dan narasi mendalam yang berhasil lolos menjadi Finalis Kejuaraan Nasional Mahasiswa Bidang Informatika dan Komputer (KMIPN) 2026 Kategori Game Development.',
-    techs: ['Game Engine', 'JavaScript', 'Interactive Audio', 'Web Game'],
+    desc: 'Permainan simulasi perkuliahan berbasis Windows & Linux dengan sistem manajemen statistik (Nilai, Stress, Tenaga), mini game akademik & sosial, serta 5 variasi ending. Karya Tim Soto Banjar Politala.',
+    techs: ['Windows & Linux', 'Life Simulation', 'Decision Making', 'Mini Games'],
     demo: 'https://niskala-masa.vercel.app/',
     github: 'https://github.com/jokobim12',
     image: '/KMIPN.png',
@@ -211,9 +211,9 @@ function Portfolio() {
                         target="_blank"
                         rel="noreferrer"
                         className="btn-action demo"
-                        title="Buka Website Langsung"
+                        title={item.category === 'Game' ? 'Kunjungi Website & Unduh Game' : 'Buka Website Langsung'}
                       >
-                        <FaExternalLinkAlt /> Live Demo
+                        {item.category === 'Game' ? <FaDownload /> : <FaExternalLinkAlt />} {item.category === 'Game' ? 'Unduh Game' : 'Live Demo'}
                       </a>
                     )}
                     {item.github && (

@@ -1,63 +1,66 @@
 import { useState } from 'react';
 import {
   FaGamepad,
-  FaPlay,
+  FaDownload,
   FaExternalLinkAlt,
   FaTrophy,
-  FaCode,
-  FaVolumeUp,
   FaCheckCircle,
-  FaBolt,
-  FaBookOpen
+  FaWindows,
+  FaLinux,
+  FaChartLine,
+  FaDice,
+  FaGraduationCap,
+  FaDesktop,
+  FaUsers
 } from 'react-icons/fa';
 import './NiskalaMasa.css';
 
-const gameDetails = [
+const gameFeatures = [
   {
-    id: 'story',
-    label: 'Sinopsis & Cerita',
-    icon: <FaBookOpen />,
-    title: 'Perjalanan Melintasi Dimensi Waktu',
-    content:
-      'Niskala Masa mengajak pemain menyelami petualangan naratif misterius di mana batas antara masa lalu, masa kini, dan masa depan saling bertaut. Pemain ditugaskan memecahkan misteri anomalitas waktu, mengungkap sejarah yang terpendam, serta merajut kembali memori yang hilang melalui eksplorasi lingkungan yang penuh teka-teki.',
+    id: 'stats',
+    number: '01',
+    label: 'Sistem Statistik',
+    icon: <FaChartLine />,
+    title: 'Kelola Nilai, Stress, dan Tenaga',
+    desc: 'Anda harus mengelola statistik tokoh utama yang terdiri dari Nilai, Stress, dan Tenaga. Dalam 1 semester disediakan 5 tenaga yang dapat digunakan untuk melaksanakan berbagai kegiatan perkuliahan, belajar, bersosialisasi, atau beristirahat.',
     points: [
-      'Alur narasi emosional bertema dimensi waktu',
-      'Eksplorasi misteri masa lalu & dampaknya di masa depan',
-      'Dialog interaktif dan pengembangan karakter yang hidup',
+      '3 Indikator Utama: Nilai Akademik, Tingkat Stress, dan Tenaga Fisik',
+      'Kuota 5 Tenaga per semester untuk mengeksekusi pilihan aktivitas',
+      'Manajemen Keseimbangan: Jangan biarkan stress terlalu tinggi atau tenaga habis',
     ],
   },
   {
-    id: 'gameplay',
-    label: 'Mekanik & Gameplay',
-    icon: <FaGamepad />,
-    title: 'Puzzle Interaktif & Eksplorasi Cerdas',
-    content:
-      'Gameplay berfokus pada interaksi cerdas pemain dengan lingkungan di sekitarnya. Pemain memecahkan teka-teki berbasis logika lingkungan, memanipulasi objek lintas era waktu, dan menavigasi rintangan dengan kontrol yang mulus dan intuitif.',
+    id: 'minigame',
+    number: '02',
+    label: 'Mini Game',
+    icon: <FaDice />,
+    title: 'Mini Game Akademik & Sosial',
+    desc: 'Mainkan Mini Game Akademik (CBT, Fast Typing) untuk meningkatkan nilai, dan Mini Game Sosial (Tebak-tebakan, Lengkapi Peribahasa) untuk menurunkan tingkat stress karakter Anda secara efektif.',
     points: [
-      'Mekanik puzzle logika & manipulasi benda antar era',
-      'Sistem interaksi objek dan navigasi peta yang responsif',
-      'Desain rintangan yang menguji rasa ingin tahu pemain',
+      'Mini Game Akademik (CBT & Fast Typing): Menunjang prestasi dan mendongkrak Nilai',
+      'Mini Game Sosial (Tebak-tebakan & Lengkapi Peribahasa): Menurunkan level stress',
+      'Interaksi Dinamis: Mengasah kecepatan berpikir dan ketangkasan pemain',
     ],
   },
   {
-    id: 'audio',
-    label: 'Visual & Audio',
-    icon: <FaVolumeUp />,
-    title: 'Atmosfer Sinematik & Soundscape Adaptif',
-    content:
-      'Dibalut dengan visual atmosferik yang menonjolkan nuansa hangat dan misteri. Arsitektur audio dirancang secara adaptif untuk memberikan efek kehadiran yang nyata, di mana musik latar bertransisi dinamis mengikuti ketegangan cerita.',
+    id: 'endings',
+    number: '03',
+    label: 'Multiple Endings',
+    icon: <FaGraduationCap />,
+    title: '5 Variasi Akhir Cerita (Ending)',
+    desc: 'Terdapat 5 variasi akhir cerita (ending) yang dipengaruhi oleh pilihan aktivitas dan statistik Anda selama masa perkuliahan, seperti Good Ending (Cum laude) dan Normal Ending (Lulus Tepat Waktu).',
     points: [
-      'Gaya visual atmosferik dengan pencahayaan dinamis',
-      'Soundscape ambient imersif via Web Audio API',
-      'Efek suara kontekstual di setiap interaksi pemain',
+      'Good Ending: Meraih predikat kelulusan kehormatan Cum Laude',
+      'Normal Ending: Menyelesaikan seluruh sks dan Lulus Tepat Waktu',
+      '3 Ending Alternatif: Jalan cerita berbeda berdasarkan konsekuensi tiap keputusan',
     ],
   },
 ];
 
 function NiskalaMasa() {
-  const [activeTab, setActiveTab] = useState(gameDetails[0].id);
+  const [activeTab, setActiveTab] = useState(gameFeatures[0].id);
 
-  const currentTab = gameDetails.find((d) => d.id === activeTab) || gameDetails[0];
+  const currentFeature = gameFeatures.find((f) => f.id === activeTab) || gameFeatures[0];
 
   return (
     <section className="niskala-masa section" id="niskala-masa">
@@ -65,23 +68,24 @@ function NiskalaMasa() {
         {/* Section Header */}
         <div className="section-header">
           <div className="section-tag">
-            <FaGamepad /> Karya Unggulan & Kompetisi Nasional
+            <FaGamepad /> Karya Kompetisi Nasional Mahasiswa
           </div>
           <h2 className="section-title">
             Game Showcase: <span className="highlight">Niskala Masa</span>
           </h2>
           <p className="section-subtitle">
-            Karya game petualangan naratif orisinal yang berhasil mengantarkan Joko Bimantaro dan tim
-            menjadi <strong>Finalis Kejuaraan Nasional Mahasiswa Bidang Informatika dan Komputer (KMIPN) 2026</strong>{' '}
-            pada Kategori Game Development.
+            Permainan simulasi perkuliahan berbasis PC (Windows & Linux) dengan sistem pengambilan keputusan nyata.
+            Karya orisinal <strong>Tim Soto Banjar (Politeknik Negeri Tanah Laut)</strong> yang berhasil menjadi{' '}
+            <strong>Finalis Kejuaraan Nasional Mahasiswa Bidang Informatika dan Komputer (KMIPN) 2026</strong>{' '}
+            Kategori Game Development.
           </p>
         </div>
 
-        {/* Bento / Showcase Grid */}
+        {/* Showcase Grid */}
         <div className="game-grid">
-          {/* Left Column: Visual Theater & Live Launch */}
+          {/* Left Column: Visual Card & Gameplay Mechanics */}
           <div className="game-theater-card">
-            {/* Window Bar */}
+            {/* Header window */}
             <div className="theater-header">
               <div className="theater-dots">
                 <span className="dot red"></span>
@@ -96,74 +100,88 @@ function NiskalaMasa() {
               </div>
             </div>
 
-            {/* Visual Frame */}
+            {/* Poster / Screenshot Viewport */}
             <div className="theater-viewport">
               <img
                 src="/KMIPN.png"
-                alt="Banner Game Niskala Masa - Finalis KMIPN 2026"
+                alt="Banner Game Niskala Masa - Tim Soto Banjar Politala"
                 className="theater-img"
                 loading="lazy"
                 width="800"
                 height="450"
               />
               <div className="theater-overlay">
-                <div className="theater-overlay-badge font-mono">
-                  <span className="live-pulse"></span> Game Dapat Dimainkan Langsung di Web
+                <div className="theater-tagline-box">
+                  <span className="theater-platform-chip font-mono">
+                    <FaDesktop /> Game PC: Windows & Linux
+                  </span>
+                  <p className="theater-tagline">
+                    "Karena setiap keputusan akan menentukan masa depanmu"
+                  </p>
                 </div>
+
                 <a
                   href="https://niskala-masa.vercel.app/"
                   target="_blank"
                   rel="noreferrer"
-                  className="theater-play-btn"
-                  title="Mainkan Game Niskala Masa di Vercel"
+                  className="theater-download-btn"
+                  title="Kunjungi website untuk download game Niskala Masa"
                 >
-                  <FaPlay className="play-icon" />
-                  <span>Mainkan Game Sekarang</span>
+                  <FaDownload />
+                  <span>Kunjungi Web & Unduh Game</span>
+                  <FaExternalLinkAlt className="ext-ic" />
                 </a>
               </div>
             </div>
 
-            {/* Quick Metrics Bar */}
-            <div className="theater-metrics font-mono">
-              <div className="metric-chip">
-                <span className="metric-lbl">Kategori</span>
-                <strong className="metric-val">Game Dev KMIPN</strong>
+            {/* Platform & Team Bar */}
+            <div className="theater-meta-bar">
+              <div className="meta-col">
+                <span className="meta-label">Platform Rilis</span>
+                <div className="platform-badges font-mono">
+                  <span className="plat-tag"><FaWindows /> Windows</span>
+                  <span className="plat-tag"><FaLinux /> Linux</span>
+                </div>
               </div>
-              <div className="metric-sep"></div>
-              <div className="metric-chip">
-                <span className="metric-lbl">Frame Rate</span>
-                <strong className="metric-val">60 FPS Smooth</strong>
+              <div className="meta-sep"></div>
+              <div className="meta-col">
+                <span className="meta-label">Tim Pengembang</span>
+                <strong className="meta-val"><FaUsers className="val-ic" /> Tim Soto Banjar</strong>
               </div>
-              <div className="metric-sep"></div>
-              <div className="metric-chip">
-                <span className="metric-lbl">Akses</span>
-                <strong className="metric-val">Live Web Browser</strong>
+              <div className="meta-sep"></div>
+              <div className="meta-col">
+                <span className="meta-label">Metode Akses</span>
+                <strong className="meta-val highlight-val">Download via Website</strong>
               </div>
             </div>
 
-            {/* Interactive Detail Switcher */}
-            <div className="theater-tabs-box">
-              <div className="theater-tab-nav">
-                {gameDetails.map((tab) => (
+            {/* Interactive Feature & Cara Main Tabs */}
+            <div className="game-mechanics-box">
+              <div className="mechanics-tab-nav">
+                {gameFeatures.map((feat) => (
                   <button
-                    key={tab.id}
-                    className={`theater-tab-btn ${activeTab === tab.id ? 'active' : ''}`}
-                    onClick={() => setActiveTab(tab.id)}
+                    key={feat.id}
+                    className={`mech-tab-btn ${activeTab === feat.id ? 'active' : ''}`}
+                    onClick={() => setActiveTab(feat.id)}
                   >
-                    {tab.icon}
-                    <span>{tab.label}</span>
+                    <span className="mech-tab-num font-mono">{feat.number}</span>
+                    <span className="mech-tab-lbl">{feat.label}</span>
                   </button>
                 ))}
               </div>
 
-              <div className="theater-tab-body">
-                <h4 className="tab-body-title">{currentTab.title}</h4>
-                <p className="tab-body-desc">{currentTab.content}</p>
-                <div className="tab-points-list">
-                  {currentTab.points.map((pt, i) => (
-                    <div className="point-item" key={i}>
+              <div className="mechanics-tab-content">
+                <div className="mech-content-header">
+                  <span className="mech-icon-pill">{currentFeature.icon}</span>
+                  <h4 className="mech-title">{currentFeature.title}</h4>
+                </div>
+                <p className="mech-desc">{currentFeature.desc}</p>
+
+                <div className="mech-points">
+                  {currentFeature.points.map((point, idx) => (
+                    <div className="mech-point-item" key={idx}>
                       <FaCheckCircle className="point-check" />
-                      <span>{pt}</span>
+                      <span>{point}</span>
                     </div>
                   ))}
                 </div>
@@ -171,79 +189,81 @@ function NiskalaMasa() {
             </div>
           </div>
 
-          {/* Right Column: Architectural & Technical Credentials */}
+          {/* Right Column: About, Meaning & System Requirements */}
           <div className="game-spec-card">
-            <h3 className="spec-heading">Rekayasa & Rekam Jejak Prestasi</h3>
-            <p className="spec-desc">
-              Dikembangkan dengan metodologi rekayasa game modern berbasis web, memastikan kualitas grafis,
-              kecepatan pemuatan tinggi, serta kompatibilitas lintas peramban tanpa instalasi pihak ketiga.
-            </p>
+            {/* Story Concept & Meaning */}
+            <div className="about-game-block">
+              <h3 className="spec-heading">Apa itu Niskala Masa?</h3>
+              <p className="spec-desc">
+                Permainan <strong>"Niskala Masa"</strong> adalah sebuah permainan berbasis{' '}
+                <strong>Windows (PC) dan Linux</strong> yang mengangkat konsep cerita simulasi perkuliahan
+                dari awal masuk hingga wisuda dengan sistem pengambilan keputusan yang akan berdampak pada
+                akhir cerita (<em>ending</em>) sang tokoh utama.
+              </p>
+              <p className="spec-desc">
+                Tidak hanya sebagai hiburan, permainan ini juga bertujuan untuk memberikan pelajaran bahwa
+                setiap pilihan yang dipilih hari ini akan menentukan hasil di masa depan. Judul{' '}
+                <strong>"Niskala Masa"</strong> bermakna <em>"Waktu yang tak berwujud"</em>, mengajarkan
+                bahwa waktu terus berjalan dan setiap detik keputusan memiliki konsekuensi nyata.
+              </p>
 
-            <div className="spec-items-container">
-              <div className="spec-card-item">
-                <div className="spec-card-top">
-                  <span className="spec-pill pill-gold font-mono">KMIPN 2026</span>
-                  <span className="spec-badge-label">Kompetisi Nasional Mahasiswa</span>
-                </div>
-                <h4 className="spec-item-title">Lolos Seleksi Finalis Nasional</h4>
-                <p className="spec-item-desc">
-                  Terpilih dari ratusan karya perguruan tinggi dan politeknik se-Indonesia pada ajang
-                  Kejuaraan Nasional Mahasiswa Bidang Informatika dan Komputer 2026.
-                </p>
-              </div>
-
-              <div className="spec-card-item">
-                <div className="spec-card-top">
-                  <span className="spec-pill pill-blue font-mono">Canvas & Web Engine</span>
-                  <span className="spec-badge-label">Arsitektur Grafis</span>
-                </div>
-                <h4 className="spec-item-title">Rendering 60 FPS Tanpa Lag</h4>
-                <p className="spec-item-desc">
-                  Mengoptimalkan alur loop animasi <code>requestAnimationFrame</code> dengan manajemen sprite dan
-                  pencahayaan yang efisien pada browser modern.
-                </p>
-              </div>
-
-              <div className="spec-card-item">
-                <div className="spec-card-top">
-                  <span className="spec-pill pill-emerald font-mono">Web Audio API</span>
-                  <span className="spec-badge-label">Desain Tata Suara</span>
-                </div>
-                <h4 className="spec-item-title">Soundscape Dinamis & Adaptif</h4>
-                <p className="spec-item-desc">
-                  Sistem pemutar suara adaptif yang secara otomatis memodulasi volume, frekuensi, dan transisi trek
-                  sesuai peristiwa yang terjadi pada pemain.
-                </p>
-              </div>
-
-              <div className="spec-card-item">
-                <div className="spec-card-top">
-                  <span className="spec-pill pill-purple font-mono">Vercel Edge</span>
-                  <span className="spec-badge-label">Penyebaran Cloud</span>
-                </div>
-                <h4 className="spec-item-title">Akses Instan & Ringan</h4>
-                <p className="spec-item-desc">
-                  Aset game dikompresi secara cerdas sehingga waktu pemuatan awal kurang dari beberapa detik di
-                  jaringan internet standar.
-                </p>
+              <div className="developer-team-chip">
+                <span className="dev-team-lbl">Dikembangkan oleh:</span>
+                <strong className="dev-team-name">Tim Soto Banjar (Politeknik Negeri Tanah Laut)</strong>
               </div>
             </div>
 
-            {/* Action Bar */}
-            <div className="spec-actions">
+            {/* System Requirements Table */}
+            <div className="sys-req-block">
+              <h4 className="sys-req-title">System Requirements</h4>
+              <div className="sys-req-grid">
+                {/* Windows Card */}
+                <div className="req-col">
+                  <div className="req-header">
+                    <FaWindows className="os-ic win" />
+                    <span>Windows (64-bit)</span>
+                  </div>
+                  <ul className="req-list">
+                    <li><strong>OS:</strong> Windows 10/11 (64-bit)</li>
+                    <li><strong>Processor:</strong> Core i3 / Ryzen 3 atau setara</li>
+                    <li><strong>Memory:</strong> 4 GB RAM (8 GB Disarankan)</li>
+                    <li><strong>Graphics:</strong> OpenGL 3.3 support</li>
+                    <li><strong>Storage:</strong> 1 GB ruang kosong</li>
+                  </ul>
+                </div>
+
+                {/* Linux Card */}
+                <div className="req-col">
+                  <div className="req-header">
+                    <FaLinux className="os-ic lnx" />
+                    <span>Linux (Debian/Arch)</span>
+                  </div>
+                  <ul className="req-list">
+                    <li><strong>OS:</strong> Ubuntu 20.04+ / Arch Linux</li>
+                    <li><strong>Processor:</strong> Core i3 / Ryzen 3 atau setara</li>
+                    <li><strong>Memory:</strong> 4 GB RAM (8 GB Disarankan)</li>
+                    <li><strong>Graphics:</strong> OpenGL 3.3 support</li>
+                    <li><strong>Storage:</strong> 1 GB ruang kosong</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            {/* Direct Action Buttons */}
+            <div className="game-action-bar">
               <a
                 href="https://niskala-masa.vercel.app/"
                 target="_blank"
                 rel="noreferrer"
                 className="btn btn-primary"
               >
-                <FaPlay /> Mainkan Niskala Masa <FaExternalLinkAlt />
+                <FaDownload /> Kunjungi Website & Unduh Game <FaExternalLinkAlt />
               </a>
               <a
                 href="#prestasi"
                 className="btn btn-secondary"
               >
-                <FaTrophy /> Lihat Piagam Prestasi
+                <FaTrophy /> Lihat Prestasi KMIPN
               </a>
             </div>
           </div>

@@ -17,7 +17,7 @@ const achievements = [
     category: 'Kompetisi Nasional Mahasiswa',
     organizer: 'Politeknik Negeri Ujung Pandang (Tuan Rumah KMIPN)',
     year: '2026',
-    desc: 'Lolos sebagai Finalis Kejuaraan Nasional Mahasiswa Bidang Informatika dan Komputer (KMIPN) melalui karya game interaktif orisinal "Niskala Masa" yang menonjolkan gameplay naratif mendalam.',
+    desc: 'Lolos sebagai Finalis Kejuaraan Nasional Mahasiswa Bidang Informatika dan Komputer (KMIPN) melalui karya game simulasi perkuliahan orisinal "Niskala Masa" oleh Tim Soto Banjar Politala.',
     icon: <FaTrophy />,
     badgeColor: 'var(--accent-amber)',
     image: '/KMIPN.png',
