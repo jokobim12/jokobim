@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
 import {
-  FaSun,
-  FaMoon,
   FaBars,
   FaTimes,
   FaCode,
+  FaGamepad,
   FaFolderOpen,
   FaTrophy,
   FaUser,
@@ -16,13 +15,14 @@ import './Navbar.css';
 const navLinks = [
   { label: 'Tentang', href: '#about', icon: <FaUser /> },
   { label: 'Banjar Script', href: '#banjar-script', icon: <FaCode />, badge: 'Bahasa' },
+  { label: 'Niskala Masa', href: '#niskala-masa', icon: <FaGamepad />, badge: 'KMIPN' },
   { label: 'Portofolio', href: '#portfolio', icon: <FaFolderOpen /> },
   { label: 'Prestasi', href: '#prestasi', icon: <FaTrophy /> },
   { label: 'CV', href: '#cv', icon: <FaFileAlt /> },
   { label: 'Kontak', href: '#contact', icon: <FaEnvelope /> },
 ];
 
-function Navbar({ theme, toggleTheme }) {
+function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('#home');
@@ -35,7 +35,7 @@ function Navbar({ theme, toggleTheme }) {
         window.requestAnimationFrame(() => {
           setScrolled(window.scrollY > 30);
 
-          const sections = ['home', 'about', 'banjar-script', 'portfolio', 'prestasi', 'cv', 'contact'];
+          const sections = ['home', 'about', 'banjar-script', 'niskala-masa', 'portfolio', 'prestasi', 'cv', 'contact'];
           const scrollPos = window.scrollY + 120;
 
           for (const id of sections) {
@@ -100,15 +100,6 @@ function Navbar({ theme, toggleTheme }) {
 
         {/* Action Buttons */}
         <div className="navbar-actions">
-          <button
-            className="theme-btn"
-            onClick={toggleTheme}
-            aria-label={theme === 'dark' ? 'Ganti ke tema terang' : 'Ganti ke tema gelap'}
-            title={theme === 'dark' ? 'Mode Terang' : 'Mode Gelap'}
-          >
-            {theme === 'dark' ? <FaSun className="icon-sun" /> : <FaMoon className="icon-moon" />}
-          </button>
-
           <a
             href="#contact"
             className="btn btn-primary btn-sm desktop-only"

@@ -167,10 +167,14 @@
 
 /* Right Info Card */
 .bjr-info-card {
-  background-color: var(--bg-surface-elevated);
+  background-color: var(--bg-surface);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
   padding: 28px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .info-title {
@@ -198,10 +202,15 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
-  padding: 12px;
+  padding: 12px 14px;
   border-radius: var(--radius-md);
-  background-color: var(--bg-surface);
+  background-color: var(--bg-surface-elevated);
   border: 1px solid var(--border-subtle);
+  transition: border-color var(--transition-fast);
+}
+
+.spec-item:hover {
+  border-color: var(--border-hover);
 }
 
 .spec-badge {

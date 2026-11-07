@@ -5,6 +5,7 @@ import {
   FaWhatsapp,
   FaArrowRight,
   FaCode,
+  FaGamepad,
   FaTrophy,
   FaGraduationCap,
   FaMapMarkerAlt,
@@ -61,11 +62,11 @@ function Hero() {
             <a href="#portfolio" className="btn btn-primary">
               Lihat Proyek <FaArrowRight />
             </a>
-            <a href="#banjar-script" className="btn btn-secondary">
-              <FaCode /> Banjar Script
+            <a href="#niskala-masa" className="btn btn-secondary">
+              <FaGamepad /> Game Niskala Masa
             </a>
-            <a href="#contact" className="btn btn-outline">
-              Hubungi Saya
+            <a href="#banjar-script" className="btn btn-outline">
+              <FaCode /> Banjar Script
             </a>
           </div>
 

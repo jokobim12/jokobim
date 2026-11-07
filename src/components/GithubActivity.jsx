@@ -9,7 +9,7 @@ const topLanguages = [
     { name: 'SQL / Others', percent: 7.5, color: '#00758F' },
 ];
 
-function GithubActivity({ theme }) {
+function GithubActivity() {
     const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(true);
     const [userStats, setUserStats] = useState({
@@ -116,7 +116,7 @@ function GithubActivity({ theme }) {
         });
     };
 
-    const chartColor = theme === 'light' ? '1a7f37' : '3fb950';
+    const chartColor = '1a7f37';
 
     return (
         <section className="github-activity section" id="activity">

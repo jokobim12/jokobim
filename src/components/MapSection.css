@@ -143,10 +143,6 @@
   display: block;
 }
 
-[data-theme="dark"] .map-embed iframe {
-  filter: invert(90%) hue-rotate(180deg) contrast(1.05) brightness(0.95);
-}
-
 /* Pin Marker */
 .map-pin-marker {
   position: absolute;

@@ -23,6 +23,7 @@ const navLinks = [
     { label: 'Beranda', href: '#home' },
     { label: 'Tentang', href: '#about' },
     { label: 'Banjar Script', href: '#banjar-script' },
+    { label: 'Niskala Masa (Game)', href: '#niskala-masa' },
     { label: 'Portofolio', href: '#portfolio' },
     { label: 'Prestasi', href: '#prestasi' },
     { label: 'CV', href: '#cv' },

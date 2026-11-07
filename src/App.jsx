@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
 import BanjarScript from './components/BanjarScript';
+import NiskalaMasa from './components/NiskalaMasa';
 import Portfolio from './components/Portfolio';
 import Prestasi from './components/Prestasi';
 import CV from './components/CV';
@@ -12,30 +13,24 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 
 function App() {
-  const [theme, setTheme] = useState(() => {
-    return localStorage.getItem('jokobim-theme') || 'dark';
-  });
-
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('jokobim-theme', theme);
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === 'dark' ? 'light' : 'dark'));
-  };
+    // Light mode exclusively as requested
+    document.documentElement.setAttribute('data-theme', 'light');
+    localStorage.removeItem('jokobim-theme');
+  }, []);
 
   return (
     <>
-      <Navbar theme={theme} toggleTheme={toggleTheme} />
+      <Navbar />
       <main>
         <Hero />
         <About />
         <BanjarScript />
+        <NiskalaMasa />
         <Portfolio />
         <Prestasi />
         <CV />
-        <GithubActivity theme={theme} />
+        <GithubActivity />
         <MapSection />
         <Contact />
       </main>
