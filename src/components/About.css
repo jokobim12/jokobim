@@ -1,11 +1,11 @@
 .about {
-  background-color: var(--bg-body);
+  background-color: var(--barca-bg);
 }
 
 .about-grid {
   display: grid;
   grid-template-columns: 0.9fr 1.1fr;
-  gap: 52px;
+  gap: 40px;
   align-items: start;
 }
 
@@ -13,21 +13,20 @@
 .about-media-col {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
 }
 
 .about-image-card {
   position: relative;
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-sm);
   overflow: hidden;
-  border: 1px solid var(--border-subtle);
-  background-color: var(--bg-surface);
-  box-shadow: var(--shadow-md);
+  border: 2px solid var(--barca-blue);
+  background-color: var(--barca-white);
 }
 
 .about-image {
   width: 100%;
-  height: 480px;
+  height: 420px;
   object-fit: cover;
   object-position: center 20%;
   display: block;
@@ -35,53 +34,54 @@
 
 .about-image-badge {
   position: absolute;
-  bottom: 16px;
-  left: 16px;
-  right: 16px;
+  bottom: 12px;
+  left: 12px;
+  right: 12px;
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 12px 16px;
-  background-color: rgba(9, 11, 16, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  background-color: var(--barca-blue);
+  border-left: 4px solid var(--barca-red);
   color: #ffffff;
 }
 
 .award-badge-icon {
-  font-size: 1.5rem;
-  color: var(--accent-amber);
+  font-size: 1.4rem;
+  color: var(--barca-red);
+  background: #ffffff;
+  padding: 4px;
+  border-radius: var(--radius-sm);
 }
 
 .about-image-badge strong {
   display: block;
-  font-size: 0.92rem;
-  font-weight: 700;
+  font-size: 0.9rem;
+  font-weight: 800;
   line-height: 1.2;
 }
 
 .about-image-badge span {
-  font-size: 0.78rem;
-  color: #94a3b8;
+  font-size: 0.76rem;
+  color: #dbe4f0;
 }
 
 .about-quick-meta {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: 18px;
-  background-color: var(--bg-surface);
+  gap: 8px;
+  padding: 16px;
+  background-color: var(--barca-white);
   border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
+  border-left: 3px solid var(--barca-blue);
+  border-radius: var(--radius-sm);
 }
 
 .quick-meta-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 8px;
+  padding-bottom: 6px;
   border-bottom: 1px solid var(--border-subtle);
 }
 
@@ -93,58 +93,66 @@
 .meta-label {
   font-size: 0.82rem;
   color: var(--text-tertiary);
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .meta-value {
   font-size: 0.86rem;
-  color: var(--text-primary);
-  font-weight: 600;
+  color: var(--barca-blue);
+  font-weight: 700;
 }
 
 .meta-value.available {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  color: var(--accent-emerald);
+  color: var(--barca-red);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--barca-red);
 }
 
 /* Right Text Column */
 .about-text-col {
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 22px;
 }
 
 .bio-title {
   font-size: 1.45rem;
   font-weight: 800;
-  color: var(--text-primary);
-  margin-bottom: 14px;
+  color: var(--barca-blue);
+  margin-bottom: 10px;
   letter-spacing: -0.02em;
 }
 
 .bio-paragraph {
   font-size: 0.98rem;
   color: var(--text-secondary);
-  line-height: 1.75;
-  margin-bottom: 12px;
+  line-height: 1.7;
+  margin-bottom: 10px;
 }
 
 .bio-paragraph strong {
-  color: var(--text-primary);
-  font-weight: 600;
+  color: var(--barca-blue);
+  font-weight: 700;
 }
 
 /* Info Table Card */
 .info-table-card {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 16px 20px;
-  background-color: var(--bg-surface);
+  gap: 10px;
+  padding: 16px;
+  background-color: var(--barca-white);
   border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
+  border-left: 3px solid var(--barca-red);
+  border-radius: var(--radius-sm);
 }
 
 .info-row {
@@ -161,38 +169,42 @@
   align-items: center;
   gap: 8px;
   color: var(--text-tertiary);
-  font-weight: 500;
+  font-weight: 600;
+}
+
+.info-cell-label svg {
+  color: var(--barca-red);
 }
 
 .info-cell-value {
-  color: var(--text-primary);
-  font-weight: 600;
+  color: var(--barca-blue);
+  font-weight: 700;
 }
 
 /* Skills Categories */
 .skills-heading {
   font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 16px;
+  font-weight: 800;
+  color: var(--barca-blue);
+  margin-bottom: 12px;
 }
 
 .skills-categories-grid {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
 }
 
 .skill-cat-card {
-  padding: 16px;
-  background-color: var(--bg-surface);
+  padding: 14px 16px;
+  background-color: var(--barca-white);
   border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-sm);
   transition: border-color var(--transition-fast);
 }
 
 .skill-cat-card:hover {
-  border-color: var(--border-hover);
+  border-color: var(--barca-blue);
 }
 
 .skill-cat-header {
@@ -200,47 +212,47 @@
   align-items: center;
   gap: 8px;
   font-size: 0.88rem;
-  font-weight: 700;
-  color: var(--text-primary);
+  font-weight: 800;
+  color: var(--barca-blue);
   margin-bottom: 10px;
 }
 
 .cat-icon {
-  color: var(--accent-primary);
+  color: var(--barca-red);
   font-size: 0.95rem;
 }
 
 .skill-cat-items {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
 }
 
 .skill-pill {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 5px 12px;
-  border-radius: var(--radius-full);
-  background-color: var(--bg-surface-elevated);
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  background-color: var(--barca-surface-alt);
+  font-size: 0.78rem;
+  color: var(--text-primary);
+  font-weight: 600;
   border: 1px solid var(--border-subtle);
 }
 
 .pill-check {
   font-size: 0.72rem;
-  color: var(--accent-emerald);
+  color: var(--barca-red);
 }
 
 @media (max-width: 960px) {
   .about-grid {
     grid-template-columns: 1fr;
-    gap: 36px;
+    gap: 28px;
   }
 
   .about-image {
-    height: 380px;
+    height: 300px;
   }
 }

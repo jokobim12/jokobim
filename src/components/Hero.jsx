@@ -1,154 +1,147 @@
 import {
   FaGithub,
   FaLinkedin,
-  FaInstagram,
   FaWhatsapp,
-  FaArrowRight,
   FaCode,
   FaGamepad,
-  FaTrophy,
-  FaGraduationCap,
+  FaFolderOpen,
   FaMapMarkerAlt,
+  FaTrophy,
+  FaCertificate,
+  FaMedal
 } from 'react-icons/fa';
 import './Hero.css';
 
 function Hero() {
   return (
     <section className="hero" id="home">
-      <div className="container hero-container">
-        {/* Left Column: Text & CTAs */}
-        <div className="hero-content">
-          <div className="hero-badge">
-            <span className="hero-badge-dot"></span>
-            <span>Software Developer & Creator of Banjar Script</span>
-          </div>
+      <div className="container">
+        {/* Barcelona Accent Bar */}
+        <div className="barca-stripe"></div>
 
-          <h1 className="hero-heading">
-            Membangun Solusi Digital & <span className="highlight">Bahasa Pemrograman</span> Orisinal.
-          </h1>
-
-          <p className="hero-lead">
-            Halo! Saya <strong>Joko Bimantaro</strong> (Jokobim), Mahasiswa D3 Teknologi Informasi 
-            Politeknik Negeri Tanah Laut (Politala). Berfokus pada Full-Stack Web Development, 
-            pengembangan game <em>Niskala Masa</em> (Finalis KMIPN 2026), serta pencipta 
-            bahasa pemrograman <em>Banjar Script</em>.
-          </p>
-
-          {/* Key Metrics / Highlights */}
-          <div className="hero-stats">
-            <div className="hero-stat-item">
-              <span className="stat-value">14+</span>
-              <span className="stat-name">Proyek Selesai</span>
+        <div className="hero-grid">
+          {/* Left Column: Personal Editorial Bio */}
+          <div className="hero-text-col">
+            <div className="hero-kicker">
+              <span className="kicker-badge">Politala TI '24</span>
+              <span className="kicker-sep">/</span>
+              <span className="kicker-role">Software & Game Developer</span>
             </div>
-            <div className="stat-separator"></div>
-            <div className="hero-stat-item">
-              <span className="stat-value">500+</span>
-              <span className="stat-name">Commits GitHub</span>
-            </div>
-            <div className="stat-separator"></div>
-            <div className="hero-stat-item">
-              <span className="stat-value">KMIPN</span>
-              <span className="stat-name">Finalis Game Dev</span>
-            </div>
-            <div className="stat-separator"></div>
-            <div className="hero-stat-item">
-              <span className="stat-value">BNSP</span>
-              <span className="stat-name">Tersertifikasi JWD</span>
-            </div>
-          </div>
 
-          {/* Action CTAs */}
-          <div className="hero-actions">
-            <a href="#portfolio" className="btn btn-primary">
-              Lihat Proyek <FaArrowRight />
-            </a>
-            <a href="#niskala-masa" className="btn btn-secondary">
-              <FaGamepad /> Game Niskala Masa
-            </a>
-            <a href="#banjar-script" className="btn btn-outline">
-              <FaCode /> Banjar Script
-            </a>
-          </div>
+            <h1 className="hero-name">
+              Joko Bimantaro
+            </h1>
 
-          {/* Social Links */}
-          <div className="hero-socials">
-            <span className="socials-label">Terhubung:</span>
-            <div className="socials-group">
-              <a
-                href="https://github.com/jokobim12"
-                target="_blank"
-                rel="noreferrer"
-                className="social-pill"
-                aria-label="GitHub Profile"
-                title="GitHub @jokobim12"
-              >
-                <FaGithub /> <span>@jokobim12</span>
+            <p className="hero-role-title">
+              Creator of <span className="highlight-blue">Banjar Script</span> & Developer of <span className="highlight-red">Niskala Masa</span>
+            </p>
+
+            <p className="hero-bio">
+              Mahasiswa D3 Teknologi Informasi di <strong>Politeknik Negeri Tanah Laut (Politala)</strong> dan developer aktif di <strong>Teaching Factory (TEFA) IT</strong>.
+              Berfokus pada rekayasa perangkat lunak web, perancangan bahasa pemrograman daerah <em>Banjar Script</em>,
+              serta game simulasi perkuliahan <em>Niskala Masa</em> (Finalis KMIPN 2026).
+            </p>
+
+            {/* Solid Action Buttons (No Gradient, No Shadow) */}
+            <div className="hero-btn-group">
+              <a href="#portfolio" className="btn btn-red">
+                <FaFolderOpen /> Lihat Portofolio
               </a>
-              <a
-                href="https://linkedin.com/in/joko-bimantaro"
-                target="_blank"
-                rel="noreferrer"
-                className="social-pill"
-                aria-label="LinkedIn Profile"
-                title="LinkedIn Joko Bimantaro"
-              >
-                <FaLinkedin /> <span>LinkedIn</span>
+              <a href="#niskala-masa" className="btn btn-blue">
+                <FaGamepad /> Game Niskala Masa
               </a>
-              <a
-                href="https://wa.me/6283112294396"
-                target="_blank"
-                rel="noreferrer"
-                className="social-pill"
-                aria-label="WhatsApp Contact"
-                title="WhatsApp Joko Bimantaro"
-              >
-                <FaWhatsapp /> <span>WhatsApp</span>
+              <a href="#banjar-script" className="btn btn-secondary">
+                <FaCode /> Banjar Script
               </a>
             </div>
-          </div>
-        </div>
 
-        {/* Right Column: Refined Profile Showcase */}
-        <div className="hero-visual">
-          <div className="profile-card">
-            <div className="profile-image-frame">
+            {/* Highlights Grid (Solid, Flat) */}
+            <div className="hero-credentials-row">
+              <div className="cred-card">
+                <div className="cred-icon red"><FaTrophy /></div>
+                <div className="cred-info">
+                  <strong>Finalis KMIPN 2026</strong>
+                  <span>Game Development (Nasional)</span>
+                </div>
+              </div>
+
+              <div className="cred-card">
+                <div className="cred-icon blue"><FaMedal /></div>
+                <div className="cred-info">
+                  <strong>Best Project 2025</strong>
+                  <span>TEFA IT Politeknik Tanah Laut</span>
+                </div>
+              </div>
+
+              <div className="cred-card">
+                <div className="cred-icon blue"><FaCertificate /></div>
+                <div className="cred-info">
+                  <strong>Sertifikasi BNSP</strong>
+                  <span>Junior Web Developer</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Social Connect bar */}
+            <div className="hero-social-strip">
+              <span className="social-label">Kontak & Profil:</span>
+              <div className="social-links-list">
+                <a
+                  href="https://github.com/jokobim12"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="social-btn"
+                  title="GitHub Profile"
+                >
+                  <FaGithub /> <span>GitHub</span>
+                </a>
+                <a
+                  href="https://linkedin.com/in/joko-bimantaro"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="social-btn"
+                  title="LinkedIn Profile"
+                >
+                  <FaLinkedin /> <span>LinkedIn</span>
+                </a>
+                <a
+                  href="https://wa.me/6283112294396"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="social-btn red-btn"
+                  title="WhatsApp"
+                >
+                  <FaWhatsapp /> <span>WhatsApp</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column: Grounded Editorial Portrait */}
+          <div className="hero-photo-col">
+            <div className="photo-frame">
+              <div className="photo-top-tag">
+                <span className="tag-dot red"></span>
+                <span className="tag-dot blue"></span>
+                <span className="tag-text font-mono">RESMI • PORTOFOLIO</span>
+              </div>
               <img
                 src="/saya.jpg"
-                alt="Joko Bimantaro - Software Developer Politala"
-                className="profile-photo"
+                alt="Joko Bimantaro - Software & Game Developer"
+                className="photo-main"
                 width="400"
                 height="500"
                 fetchPriority="high"
               />
-              <div className="profile-overlay-gradient"></div>
-              
-              <div className="profile-location-chip font-mono">
-                <FaMapMarkerAlt className="chip-icon" /> Takisung, Tanah Laut, Kalsel
-              </div>
-            </div>
-
-            <div className="profile-card-details">
-              <div className="profile-header-info">
-                <h2 className="profile-name">Joko Bimantaro</h2>
-                <p className="profile-role">Full-Stack & Game Developer</p>
-              </div>
-
-              <div className="profile-badges-row">
-                <div className="profile-tag">
-                  <FaGraduationCap className="tag-ic" /> Politala '24
+              <div className="photo-caption">
+                <strong className="caption-name">Joko Bimantaro (Jokobim)</strong>
+                <span className="caption-domicile">
+                  <FaMapMarkerAlt className="loc-icon" /> Takisung, Kabupaten Tanah Laut, Kalsel
+                </span>
+                <div className="caption-status">
+                  <span className="status-solid-dot"></span>
+                  <span>Tersedia untuk Proyek Web & Game</span>
                 </div>
-                <div className="profile-tag">
-                  <FaTrophy className="tag-ic" /> TEFA IT Politala
-                </div>
-              </div>
-
-              <div className="profile-tech-stack">
-                <span className="tech-chip">PHP</span>
-                <span className="tech-chip">Laravel 12</span>
-                <span className="tech-chip">React JS</span>
-                <span className="tech-chip">Tailwind</span>
-                <span className="tech-chip">MySQL</span>
-                <span className="tech-chip highlight-chip">Banjar Script</span>
               </div>
             </div>
           </div>

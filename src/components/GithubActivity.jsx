@@ -3,10 +3,10 @@ import { FaGithub, FaCodeBranch, FaFolderOpen, FaFire, FaCalendarAlt, FaSync, Fa
 import './GithubActivity.css';
 
 const topLanguages = [
-    { name: 'PHP / Laravel', percent: 42.5, color: '#4F5D95' },
-    { name: 'JavaScript / React', percent: 35.0, color: '#f1e05a' },
-    { name: 'HTML & CSS', percent: 15.0, color: '#e34c26' },
-    { name: 'SQL / Others', percent: 7.5, color: '#00758F' },
+    { name: 'PHP / Laravel', percent: 42.5, color: '#004d98' },
+    { name: 'JavaScript / React', percent: 35.0, color: '#a50044' },
+    { name: 'HTML & CSS', percent: 15.0, color: '#002d62' },
+    { name: 'SQL / Others', percent: 7.5, color: '#7a0032' },
 ];
 
 function GithubActivity() {
@@ -116,7 +116,7 @@ function GithubActivity() {
         });
     };
 
-    const chartColor = '1a7f37';
+    const chartColor = '004d98';
 
     return (
         <section className="github-activity section" id="activity">

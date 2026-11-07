@@ -1,44 +1,64 @@
 :root {
-  /* Clean Editorial Light Mode Palette (Default & Only Mode) */
-  --bg-body: #f8fafc;
-  --bg-surface: #ffffff;
-  --bg-surface-elevated: #f1f5f9;
-  --bg-surface-hover: #e2e8f0;
-  --bg-badge: rgba(79, 70, 229, 0.08);
-  --bg-glass: rgba(248, 250, 252, 0.92);
+  /* FC Barcelona / Blaugrana Color Palette (Hanya Biru, Merah, dan Putih) */
+  --barca-blue: #004d98;
+  --barca-blue-dark: #002d62;
+  --barca-blue-subtle: #edf3fb;
+  
+  --barca-red: #a50044;
+  --barca-red-dark: #7a0032;
+  --barca-red-subtle: #fbebf1;
 
-  --border-subtle: rgba(15, 23, 42, 0.08);
-  --border-hover: rgba(15, 23, 42, 0.16);
-  --border-accent: rgba(79, 70, 229, 0.28);
+  --barca-white: #ffffff;
+  --barca-bg: #f8fafd;
+  --barca-surface: #ffffff;
+  --barca-surface-alt: #f0f4fa;
 
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-tertiary: #94a3b8;
+  /* Strict Semantic Mapping */
+  --bg-body: var(--barca-bg);
+  --bg-surface: var(--barca-surface);
+  --bg-surface-elevated: var(--barca-surface-alt);
+  --bg-surface-hover: #e6eef8;
+  --bg-badge: var(--barca-blue-subtle);
+  --bg-glass: var(--barca-white);
 
-  --accent-primary: #4f46e5;
-  --accent-primary-hover: #4338ca;
-  --accent-primary-glow: rgba(79, 70, 229, 0.18);
+  /* Solid Borders (No Shadow) */
+  --border-subtle: #dbe4f0;
+  --border-hover: var(--barca-blue);
+  --border-accent: var(--barca-red);
+  --border-blue: var(--barca-blue);
+  --border-red: var(--barca-red);
 
-  --accent-blue: #0284c7;
-  --accent-emerald: #059669;
-  --accent-amber: #d97706;
-  --accent-rose: #e11d48;
+  /* High Contrast Flat Typography */
+  --text-primary: #0a1628;
+  --text-secondary: #334862;
+  --text-tertiary: #5e738d;
+
+  /* Accent Colors */
+  --accent-primary: var(--barca-blue);
+  --accent-primary-hover: var(--barca-blue-dark);
+  --accent-red: var(--barca-red);
+  --accent-red-hover: var(--barca-red-dark);
+  --accent-blue: var(--barca-blue);
+  --accent-emerald: var(--barca-blue);
+  --accent-amber: var(--barca-red);
+  --accent-rose: var(--barca-red);
 
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
-  --radius-xl: 22px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 10px;
   --radius-full: 9999px;
 
-  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06);
-  --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
-  --shadow-lg: 0 12px 32px rgba(15, 23, 42, 0.1);
+  /* NO SHADOWS (Flat Clean Aesthetic) */
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
 
-  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.2s ease;
 
   /* Legacy & Cross-component aliases */
   --bg-primary: var(--bg-body);
@@ -50,60 +70,27 @@
   --border-color: var(--border-subtle);
   --border-muted: var(--border-subtle);
   --text-muted: var(--text-tertiary);
-  --accent-green: var(--accent-emerald);
-  --accent-green-bright: var(--accent-emerald);
-  --accent-yellow: var(--accent-amber);
-  --accent-orange: var(--accent-amber);
-  --accent-purple: #9333ea;
-  --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --accent-green: var(--barca-blue);
+  --accent-green-bright: var(--barca-blue);
+  --accent-yellow: var(--barca-red);
+  --accent-orange: var(--barca-red);
+  --accent-purple: var(--barca-blue);
+  --transition: all 0.2s ease;
 }
 
 [data-theme="light"] {
-  /* Light Mode Palette - Clean Crisp Editorial Linen */
-  --bg-body: #f8fafc;
-  --bg-surface: #ffffff;
-  --bg-surface-elevated: #f1f5f9;
-  --bg-surface-hover: #e2e8f0;
-  --bg-badge: rgba(99, 102, 241, 0.08);
-  --bg-glass: rgba(248, 250, 252, 0.88);
-
-  --border-subtle: rgba(0, 0, 0, 0.08);
-  --border-hover: rgba(0, 0, 0, 0.16);
-  --border-accent: rgba(99, 102, 241, 0.3);
-
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-tertiary: #94a3b8;
-
-  --accent-primary: #4f46e5;
-  --accent-primary-hover: #4338ca;
-  --accent-primary-glow: rgba(79, 70, 229, 0.15);
-
-  --accent-blue: #0284c7;
-  --accent-emerald: #059669;
-  --accent-amber: #d97706;
-  --accent-rose: #e11d48;
-
-  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06);
-  --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
-  --shadow-lg: 0 12px 32px rgba(15, 23, 42, 0.1);
-
-  /* Legacy & Cross-component aliases */
-  --bg-primary: var(--bg-body);
-  --bg-secondary: var(--bg-surface);
-  --bg-tertiary: var(--bg-surface-elevated);
-  --bg-overlay: var(--bg-surface-hover);
-  --card-bg: var(--bg-surface);
-  --card-border: var(--border-subtle);
-  --border-color: var(--border-subtle);
-  --border-muted: var(--border-subtle);
-  --text-muted: var(--text-tertiary);
-  --accent-green: var(--accent-emerald);
-  --accent-green-bright: var(--accent-emerald);
-  --accent-yellow: var(--accent-amber);
-  --accent-orange: var(--accent-amber);
-  --accent-purple: #9333ea;
-  --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Enforce identical solid Blaugrana tokens */
+  --bg-body: var(--barca-bg);
+  --bg-surface: var(--barca-surface);
+  --bg-surface-elevated: var(--barca-surface-alt);
+  --bg-surface-hover: #e6eef8;
+  --border-subtle: #dbe4f0;
+  --text-primary: #0a1628;
+  --text-secondary: #334862;
+  --text-tertiary: #5e738d;
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
 }
 
 *, *::before, *::after {
@@ -115,7 +102,7 @@
 html {
   font-size: 16px;
   scroll-behavior: smooth;
-  scroll-padding-top: 88px;
+  scroll-padding-top: 84px;
   -webkit-text-size-adjust: 100%;
 }
 
@@ -127,7 +114,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-  transition: background-color var(--transition-normal), color var(--transition-normal);
 }
 
 a {
@@ -165,20 +151,20 @@ code, pre, .font-mono {
 }
 
 .section {
-  padding: 100px 0;
+  padding: 80px 0;
   position: relative;
 }
 
 .section-divider {
-  height: 1px;
+  height: 2px;
   width: 100%;
-  background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
+  background-color: var(--border-subtle);
 }
 
 /* Section Header Component */
 .section-header {
-  margin-bottom: 48px;
-  max-width: 720px;
+  margin-bottom: 40px;
+  max-width: 760px;
 }
 
 .section-tag {
@@ -186,15 +172,15 @@ code, pre, .font-mono {
   align-items: center;
   gap: 8px;
   font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
+  font-weight: 700;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--accent-primary);
-  background-color: var(--bg-badge);
+  color: var(--barca-red);
+  background-color: var(--barca-red-subtle);
   padding: 4px 12px;
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-sm);
   margin-bottom: 12px;
-  border: 1px solid var(--border-accent);
+  border: 1px solid var(--barca-red);
 }
 
 .section-title {
@@ -202,33 +188,30 @@ code, pre, .font-mono {
   font-weight: 800;
   line-height: 1.2;
   letter-spacing: -0.03em;
-  color: var(--text-primary);
-  margin-bottom: 14px;
+  color: var(--barca-blue);
+  margin-bottom: 12px;
 }
 
 .section-title .highlight {
-  color: var(--accent-primary);
-  background: linear-gradient(135deg, var(--accent-primary), var(--accent-blue));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--barca-red);
 }
 
 .section-subtitle {
-  font-size: 1.05rem;
+  font-size: 1.02rem;
   color: var(--text-secondary);
   line-height: 1.6;
 }
 
-/* Button UI Components */
+/* Button UI Components (Flat, Solid, No Gradient, No Shadow) */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 10px 22px;
-  border-radius: var(--radius-md);
-  font-size: 0.92rem;
-  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 700;
   cursor: pointer;
   transition: all var(--transition-fast);
   white-space: nowrap;
@@ -236,103 +219,98 @@ code, pre, .font-mono {
   text-decoration: none;
 }
 
-.btn-primary {
-  background-color: var(--accent-primary);
+.btn-primary,
+.btn-blue {
+  background-color: var(--barca-blue);
   color: #ffffff;
-  border: 1px solid transparent;
-  box-shadow: 0 2px 8px var(--accent-primary-glow);
+  border: 2px solid var(--barca-blue);
 }
 
-.btn-primary:hover {
-  background-color: var(--accent-primary-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 14px var(--accent-primary-glow);
+.btn-primary:hover,
+.btn-blue:hover {
+  background-color: var(--barca-blue-dark);
+  border-color: var(--barca-blue-dark);
+  color: #ffffff;
+}
+
+.btn-red {
+  background-color: var(--barca-red);
+  color: #ffffff;
+  border: 2px solid var(--barca-red);
+}
+
+.btn-red:hover {
+  background-color: var(--barca-red-dark);
+  border-color: var(--barca-red-dark);
   color: #ffffff;
 }
 
 .btn-secondary {
-  background-color: var(--bg-surface-elevated);
-  color: var(--text-primary);
-  border: 1px solid var(--border-subtle);
+  background-color: #ffffff;
+  color: var(--barca-blue);
+  border: 2px solid var(--barca-blue);
 }
 
 .btn-secondary:hover {
-  background-color: var(--bg-surface-hover);
-  border-color: var(--border-hover);
-  transform: translateY(-2px);
+  background-color: var(--barca-blue-subtle);
+  color: var(--barca-blue-dark);
 }
 
 .btn-outline {
-  background: transparent;
+  background-color: #ffffff;
   color: var(--text-primary);
-  border: 1px solid var(--border-subtle);
+  border: 2px solid var(--border-subtle);
 }
 
 .btn-outline:hover {
-  background-color: var(--bg-surface-elevated);
-  border-color: var(--border-hover);
-  transform: translateY(-2px);
+  background-color: var(--barca-blue-subtle);
+  border-color: var(--barca-blue);
+  color: var(--barca-blue);
 }
 
 .btn-sm {
-  padding: 7px 14px;
+  padding: 6px 14px;
   font-size: 0.82rem;
-  border-radius: var(--radius-sm);
-}
-
-/* Badge component */
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 3px 10px;
-  border-radius: var(--radius-full);
-  font-size: 0.75rem;
-  font-weight: 500;
-  background-color: var(--bg-surface-elevated);
-  color: var(--text-secondary);
-  border: 1px solid var(--border-subtle);
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg-body);
+  background: #f0f4fa;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--border-subtle);
+  background: #c3d2e5;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--border-hover);
+  background: var(--barca-blue);
 }
 
-/* Print Styles */
-@media print {
-  body {
-    background: #ffffff !important;
-    color: #000000 !important;
-  }
-  .navbar, .footer, .btn, .map-section, .contact-form-wrapper {
-    display: none !important;
-  }
-}
-
-/* Responsive adjustments */
+/* Mobile Optimizations */
 @media (max-width: 768px) {
   .section {
-    padding: 64px 0;
+    padding: 50px 0;
   }
   .container {
-    padding: 0 18px;
+    padding: 0 16px;
   }
   .section-header {
-    margin-bottom: 32px;
+    margin-bottom: 24px;
+  }
+  .section-title {
+    font-size: 1.65rem;
+  }
+  .section-subtitle {
+    font-size: 0.92rem;
+  }
+  .btn {
+    width: 100%;
+    padding: 12px 18px;
   }
 }

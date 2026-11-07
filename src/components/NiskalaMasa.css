@@ -1,481 +1,392 @@
+/* Niskala Masa Section - Pure Barcelona Palette (No Shadows, No Gradients) */
 .niskala-masa {
-  background-color: var(--bg-body);
+  background-color: var(--barca-bg);
 }
 
-.game-grid {
+/* 1. Apa itu Niskala Masa Card */
+.niskala-intro-card {
+  background-color: var(--barca-white);
+  border: 2px solid var(--barca-blue);
+  border-radius: var(--radius-sm);
+  padding: 32px;
+  margin-bottom: 28px;
+}
+
+.intro-grid {
   display: grid;
-  grid-template-columns: 1.18fr 0.82fr;
+  grid-template-columns: 1fr 1.1fr;
   gap: 36px;
-  align-items: start;
+  align-items: center;
 }
 
-/* Left Column: Theater Card */
-.game-theater-card {
-  background-color: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow-sm);
+.intro-poster-wrap {
   display: flex;
   flex-direction: column;
-  transition: border-color var(--transition-fast);
-}
-
-.game-theater-card:hover {
-  border-color: var(--border-hover);
-}
-
-.theater-header {
-  background-color: var(--bg-surface-elevated);
-  border-bottom: 1px solid var(--border-subtle);
-  padding: 12px 18px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   gap: 12px;
 }
 
-.theater-dots {
-  display: flex;
-  gap: 6px;
-}
-
-.theater-dots .dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-}
-
-.dot.red { background-color: #ef4444; }
-.dot.yellow { background-color: #f59e0b; }
-.dot.green { background-color: #10b981; }
-
-.theater-title {
-  font-size: 0.78rem;
-  color: var(--text-secondary);
-  font-weight: 500;
-}
-
-.theater-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.74rem;
-  font-weight: 700;
-  color: var(--accent-amber);
-  background-color: rgba(217, 119, 6, 0.1);
-  border: 1px solid rgba(217, 119, 6, 0.25);
-  padding: 3px 10px;
-  border-radius: var(--radius-full);
-}
-
-.badge-trophy {
-  font-size: 0.82rem;
-}
-
-/* Poster Viewport */
-.theater-viewport {
-  position: relative;
+.intro-poster-img {
   width: 100%;
-  height: 340px;
-  background-color: #0f172a;
-  overflow: hidden;
+  height: auto;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--barca-blue-dark);
+  display: block;
 }
 
-.theater-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  transition: transform 0.4s ease;
-}
-
-.game-theater-card:hover .theater-img {
-  transform: scale(1.02);
-}
-
-.theater-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(15, 23, 42, 0.3) 0%, rgba(15, 23, 42, 0.85) 100%);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 20px;
-}
-
-.theater-tagline-box {
+.intro-poster-meta {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.theater-platform-chip {
+.platform-tag {
+  display: inline-flex;
+  align-items: center;
   align-self: flex-start;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 5px 12px;
-  border-radius: var(--radius-full);
-  background-color: rgba(15, 23, 42, 0.85);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  gap: 6px;
+  background-color: var(--barca-red);
   color: #ffffff;
-  font-size: 0.74rem;
-  font-weight: 600;
-}
-
-.theater-tagline {
-  color: #e2e8f0;
-  font-size: 0.95rem;
-  font-style: italic;
-  max-width: 440px;
-  line-height: 1.4;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
-}
-
-.theater-download-btn {
-  align-self: center;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 26px;
-  border-radius: var(--radius-full);
-  background-color: var(--accent-primary);
-  color: #ffffff;
-  font-size: 0.92rem;
+  padding: 4px 10px;
+  font-size: 0.76rem;
   font-weight: 700;
-  box-shadow: 0 4px 20px var(--accent-primary-glow);
-  transition: all var(--transition-fast);
-  text-decoration: none;
+  border-radius: var(--radius-sm);
 }
 
-.theater-download-btn:hover {
-  background-color: var(--accent-primary-hover);
-  transform: translateY(-2px) scale(1.02);
-  color: #ffffff;
+.poster-tagline {
+  font-size: 0.88rem;
+  font-style: italic;
+  font-weight: 600;
+  color: var(--barca-blue);
+  line-height: 1.4;
 }
 
-.ext-ic {
-  font-size: 0.78rem;
-  opacity: 0.85;
+.intro-red-title {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: var(--barca-red);
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
 }
 
-/* Meta Bar */
-.theater-meta-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 20px;
-  background-color: var(--bg-surface-elevated);
-  border-bottom: 1px solid var(--border-subtle);
-  gap: 12px;
-  flex-wrap: wrap;
+.intro-text {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 14px;
 }
 
-.meta-col {
+.intro-text strong {
+  color: var(--barca-blue);
+}
+
+.intro-text em {
+  color: var(--barca-red);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.intro-dev-box {
+  background-color: var(--barca-blue-light);
+  border: 2px solid var(--barca-blue);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  margin-top: 18px;
+  margin-bottom: 14px;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 4px;
 }
 
-.meta-label {
-  font-size: 0.7rem;
-  color: var(--text-tertiary);
+.dev-box-label {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--barca-blue);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  font-weight: 600;
 }
 
-.platform-badges {
-  display: flex;
-  gap: 6px;
-}
-
-.plat-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 2px 8px;
-  border-radius: var(--radius-sm);
-  background-color: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
-  font-size: 0.76rem;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.meta-val {
-  font-size: 0.86rem;
-  color: var(--text-primary);
-  font-weight: 700;
-}
-
-.val-ic {
-  color: var(--accent-primary);
-  margin-right: 4px;
-}
-
-.highlight-val {
-  color: var(--accent-emerald);
-}
-
-.meta-sep {
-  width: 1px;
-  height: 32px;
-  background-color: var(--border-subtle);
-}
-
-/* Mechanics Tabs */
-.game-mechanics-box {
-  padding: 24px;
-}
-
-.mechanics-tab-nav {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  margin-bottom: 20px;
-}
-
-.mech-tab-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 10px 14px;
-  border-radius: var(--radius-md);
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--text-secondary);
-  background-color: var(--bg-surface-elevated);
-  border: 1px solid var(--border-subtle);
-  transition: all var(--transition-fast);
-  cursor: pointer;
-}
-
-.mech-tab-num {
-  font-size: 0.75rem;
+.dev-box-name {
+  font-size: 0.96rem;
   font-weight: 800;
-  color: var(--text-tertiary);
+  color: var(--barca-blue-dark);
 }
 
-.mech-tab-btn:hover {
-  color: var(--text-primary);
-  border-color: var(--border-hover);
-}
-
-.mech-tab-btn.active {
-  color: var(--accent-primary);
-  background-color: var(--bg-badge);
-  border-color: var(--border-accent);
-}
-
-.mech-tab-btn.active .mech-tab-num {
-  color: var(--accent-primary);
-}
-
-.mechanics-tab-content {
-  background-color: var(--bg-surface-elevated);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
-  padding: 20px;
-}
-
-.mech-content-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 8px;
-}
-
-.mech-icon-pill {
-  width: 32px;
-  height: 32px;
-  border-radius: var(--radius-sm);
-  background-color: var(--bg-badge);
-  color: var(--accent-primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.95rem;
-}
-
-.mech-title {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--text-primary);
-}
-
-.mech-desc {
-  font-size: 0.88rem;
-  color: var(--text-secondary);
-  line-height: 1.65;
-  margin-bottom: 16px;
-}
-
-.mech-points {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.mech-point-item {
+.intro-notice-box {
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  font-size: 0.84rem;
-  color: var(--text-primary);
-  font-weight: 500;
-  line-height: 1.45;
+  background-color: var(--barca-red-light);
+  border: 1px solid var(--barca-red);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--barca-red-dark);
 }
 
-.point-check {
-  font-size: 0.85rem;
-  color: var(--accent-emerald);
+.notice-icon {
+  font-size: 1.1rem;
   flex-shrink: 0;
   margin-top: 2px;
+  color: var(--barca-red);
 }
 
-/* Right Column: Spec Card */
-.game-spec-card {
-  background-color: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  padding: 28px;
-  box-shadow: var(--shadow-sm);
+/* 2. Features List (01, 02, 03) */
+.niskala-features-list {
   display: flex;
   flex-direction: column;
+  gap: 16px;
+  margin-bottom: 36px;
+}
+
+.feature-block-card {
+  background-color: var(--barca-white);
+  border: 2px solid var(--border-subtle);
+  border-left: 6px solid var(--barca-blue);
+  border-radius: var(--radius-sm);
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  transition: border-color var(--transition-fast);
+}
+
+.feature-block-card:hover {
+  border-color: var(--barca-blue);
+  border-left-color: var(--barca-red);
+}
+
+.feature-num-col {
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: var(--barca-blue);
+  line-height: 1;
+  min-width: 60px;
+  text-align: center;
+}
+
+.feature-block-card:nth-child(2) .feature-num-col {
+  color: var(--barca-red);
+}
+
+.feature-body-col {
+  flex: 1;
+}
+
+.feature-card-title {
+  font-size: 1.18rem;
+  font-weight: 800;
+  color: var(--barca-blue-dark);
+  margin-bottom: 6px;
+}
+
+.feature-card-desc {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* 3. System Requirements */
+.niskala-sys-section {
+  background-color: var(--barca-white);
+  border: 2px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 32px;
+  margin-bottom: 32px;
+}
+
+.sys-red-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--barca-red);
+  text-align: center;
+  margin-bottom: 28px;
+  letter-spacing: -0.01em;
+}
+
+.sys-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 24px;
 }
 
-.spec-heading {
-  font-size: 1.3rem;
-  font-weight: 800;
-  color: var(--text-primary);
-  margin-bottom: 12px;
+.sys-os-card {
+  background-color: var(--barca-surface-alt);
+  border: 2px solid var(--barca-blue);
+  border-radius: var(--radius-sm);
+  padding: 24px;
 }
 
-.spec-desc {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  line-height: 1.65;
-  margin-bottom: 14px;
+.sys-os-card:last-child {
+  border-color: var(--barca-red);
 }
 
-.developer-team-chip {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  padding: 12px 16px;
-  border-radius: var(--radius-md);
-  background-color: var(--bg-badge);
-  border: 1px solid var(--border-accent);
-  margin-top: 14px;
-}
-
-.dev-team-lbl {
-  font-size: 0.74rem;
-  color: var(--accent-primary);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
-.dev-team-name {
-  font-size: 0.9rem;
-  color: var(--text-primary);
-  font-weight: 700;
-}
-
-/* System Requirements */
-.sys-req-block {
-  border-top: 1px solid var(--border-subtle);
-  padding-top: 20px;
-}
-
-.sys-req-title {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 14px;
-}
-
-.sys-req-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-}
-
-.req-col {
-  padding: 14px;
-  border-radius: var(--radius-md);
-  background-color: var(--bg-surface-elevated);
-  border: 1px solid var(--border-subtle);
-}
-
-.req-header {
+.sys-os-header {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 0.84rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 10px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--border-subtle);
+  gap: 12px;
+  margin-bottom: 18px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--border-subtle);
 }
 
-.os-ic.win {
-  color: #0284c7;
+.os-icon {
+  font-size: 1.8rem;
 }
 
-.os-ic.lnx {
+.os-win {
+  color: #0078d4;
+}
+
+.os-lnx {
   color: #f59e0b;
 }
 
-.req-list {
+.os-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--barca-blue-dark);
+}
+
+.sys-specs-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  font-size: 0.78rem;
-  color: var(--text-secondary);
-  line-height: 1.45;
+  gap: 10px;
 }
 
-.req-list strong {
-  color: var(--text-primary);
-}
-
-.game-action-bar {
+.sys-specs-list li {
   display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  padding-top: 8px;
+  gap: 8px;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
 }
 
-@media (max-width: 960px) {
-  .game-grid {
+.spec-label {
+  font-weight: 800;
+  color: var(--barca-blue);
+  min-width: 85px;
+}
+
+.sys-os-card:last-child .spec-label {
+  color: var(--barca-red);
+}
+
+.spec-val {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* 4. Action CTA */
+.niskala-action-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.cta-main-btn {
+  background-color: var(--barca-red);
+  color: #ffffff;
+  border: 2px solid var(--barca-red);
+  font-weight: 800;
+  padding: 13px 28px;
+  border-radius: var(--radius-sm);
+  box-shadow: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.cta-main-btn:hover {
+  background-color: var(--barca-red-dark);
+  border-color: var(--barca-red-dark);
+  color: #ffffff;
+}
+
+.cta-ext {
+  font-size: 0.8rem;
+}
+
+.cta-sub-btn {
+  background-color: var(--barca-white);
+  color: var(--barca-blue);
+  border: 2px solid var(--barca-blue);
+  font-weight: 800;
+  padding: 13px 24px;
+  border-radius: var(--radius-sm);
+  box-shadow: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.cta-sub-btn:hover {
+  background-color: var(--barca-blue);
+  color: #ffffff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .intro-grid {
     grid-template-columns: 1fr;
-    gap: 28px;
+    gap: 24px;
   }
 
-  .theater-viewport {
-    height: 280px;
-  }
-
-  .meta-sep {
-    display: none;
+  .sys-cards-grid {
+    grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 600px) {
-  .mechanics-tab-nav {
-    grid-template-columns: 1fr;
+  .niskala-intro-card {
+    padding: 20px 16px;
   }
 
-  .sys-req-grid {
-    grid-template-columns: 1fr;
+  .intro-red-title {
+    font-size: 1.4rem;
+  }
+
+  .feature-block-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .feature-num-col {
+    font-size: 2.2rem;
+    min-width: auto;
+    text-align: left;
+  }
+
+  .sys-os-card {
+    padding: 18px 14px;
+  }
+
+  .sys-specs-list li {
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .spec-label {
+    min-width: auto;
+  }
+
+  .niskala-action-cta {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .cta-main-btn,
+  .cta-sub-btn {
+    width: 100%;
+    justify-content: center;
   }
 }

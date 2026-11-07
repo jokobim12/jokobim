@@ -22,7 +22,7 @@ const projects = [
     techs: ['Windows & Linux', 'Life Simulation', 'Decision Making', 'Mini Games'],
     demo: 'https://niskala-masa.vercel.app/',
     github: 'https://github.com/jokobim12',
-    image: '/KMIPN.png',
+    image: '/niskala-poster.jpg',
   },
   {
     id: 'lms-bekantan',
